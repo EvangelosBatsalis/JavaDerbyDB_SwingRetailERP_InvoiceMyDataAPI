@@ -5,12 +5,20 @@
  */
 package schoolerpinvoicemydata;
 
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+
+
 /**
  *
  * Evangelos Batsalis
  */
 public class MainClass {
 
+    
     /**
      * @param args the command line arguments
      */
@@ -19,8 +27,8 @@ public class MainClass {
         MainWindowFrame mainWindowsFrame = new MainWindowFrame();
         mainWindowsFrame.pack();
         mainWindowsFrame.setLocationRelativeTo(null);
-        mainWindowsFrame.setVisible(true);
-    
+        mainWindowsFrame.setVisible(true);   
     }
-    
 }
+    
+

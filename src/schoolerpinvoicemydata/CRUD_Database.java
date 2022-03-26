@@ -20,9 +20,13 @@ public class CRUD_Database {
     EntityManager em = emf.createEntityManager();
     EmployeesJpaController sjc = new EmployeesJpaController(emf);   
     
-    public void newUser(int kati, String userName, int passWord) throws Exception{
-        Employees employee = new Employees(userName,passWord); 
+    public void newUser(String userName, int password) throws Exception{
+        Employees employee = new Employees(userName,password); 
         sjc.create(employee);
     }
+    public String findUser(String userName){
+        System.out.println(sjc.findEmployees(userName));
+        return sjc.findEmployees(userName).toString();
+        }
     
 }

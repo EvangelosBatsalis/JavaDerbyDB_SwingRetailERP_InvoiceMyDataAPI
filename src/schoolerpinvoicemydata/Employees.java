@@ -39,6 +39,11 @@ public class Employees implements Serializable {
     public Employees() {
     }
 
+    public Employees(String username, Integer password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public Employees(String username) {
         this.username = username;
     }

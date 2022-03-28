@@ -209,14 +209,14 @@ public class MainWindowFrame extends javax.swing.JFrame {
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         // TODO add your handling code here:
-        String SELECT_QUERY = "SELECT * FROM SA.EMPLOYEE WHERE USERNAME = "+"'"+jTextFieldUserName.getText()+"'";
+        String SELECT_QUERY = "SELECT * FROM SA.EMPLOYEES WHERE USERNAME = "+"'"+jTextFieldUserName.getText()+"'";
         System.out.println(jTextFieldUserName.getText());
         System.out.println(jPasswordField.getText());
         if((jTextFieldUserName.getText().equals("")) || (jPasswordField.getText().equals(""))){
             JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
         }else{
-            if(databaseRecordCheck() == true){
-                System.out.println("O xrhsths yparxei hdh");
+            if(databaseRecordCheck() == false){
+                JOptionPane.showMessageDialog(null, "UserName is Incorrect", this.getTitle(), JOptionPane.WARNING_MESSAGE);
             }else{
                 try{
                     Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
@@ -231,13 +231,14 @@ public class MainWindowFrame extends javax.swing.JFrame {
                         String userName = result.getString("USERNAME");
                         String password = result.getString("PASSWORD");
                     
-                    if((result.getString("USERNAME").equals(jTextFieldUserName.getText())) && (result.getString("PASSWORD").equals(jPasswordField.getText()))){
-                        JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-                        
+                    if((userName.equals(jTextFieldUserName.getText())) && (!(password.equals(jPasswordField.getText())))){
+                        JOptionPane.showMessageDialog(null, "Password Incorrect", this.getTitle(), JOptionPane.WARNING_MESSAGE);
                     }
-                        //System.out.println("UserName: "+userName+ "\t"+ "Password: "+password);
+                    //System.out.println("UserName: "+userName+ "\t"+ "Password: "+password);
+                    else if((userName.equals(jTextFieldUserName.getText())) && (password.equals(jPasswordField.getText()))){
+                        JOptionPane.showMessageDialog(null, "Login OK...", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                            }
                     }
-
 
                 }catch(SQLException e){
                     System.out.println(e);
@@ -268,7 +269,7 @@ public class MainWindowFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
         }else{
             if(databaseRecordCheck() == true){
-                System.out.println("O xrhsths yparxei hdh");
+                JOptionPane.showMessageDialog(null, "UserName already exists. Please enter a new one", this.getTitle(), JOptionPane.WARNING_MESSAGE);
             }else{
                 try{
                     Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");

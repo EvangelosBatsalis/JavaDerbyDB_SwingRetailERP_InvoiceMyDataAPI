@@ -262,6 +262,11 @@ public class MainWindowFrame extends javax.swing.JFrame {
                         //System.out.println("UserName: "+userName+ "\t"+ "Password: "+password);
                         else if((userName.equals(jTextFieldUserName.getText())) && (password.equals(jPasswordField.getText()))){
                             JOptionPane.showMessageDialog(null, "Login OK...", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                                    StageOne so = new StageOne();
+                                    so.pack();
+                                    so.setLocationRelativeTo(null);
+                                    so.setVisible(true); 
+                                    
                         }
                     }
 

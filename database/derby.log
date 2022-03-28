@@ -257,3 +257,9 @@ ERROR 08004: Connection authentication failure occurred.  Reason: Invalid authen
 ============= end nested exception, level (1) ===========
 Cleanup action completed
 Mon Mar 28 21:52:40 EEST 2022 Thread[DRDAConnThread_2,5,main] (DATABASE = InvoiceMyDataAPI), (DRDAID = {6}), Connection authentication failure occurred.  Reason: Invalid authentication..
+----------------------------------------------------------------
+Tue Mar 29 00:54:42 EEST 2022: Shutting down Derby engine
+----------------------------------------------------------------
+Tue Mar 29 00:54:42 EEST 2022:
+Shutting down instance a816c00e-017f-d1db-d40a-000056a0cabb on database directory C:\Users\User\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPI with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+----------------------------------------------------------------

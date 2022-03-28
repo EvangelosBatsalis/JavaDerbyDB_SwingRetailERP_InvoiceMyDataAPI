@@ -26,7 +26,12 @@ public class CRUD_Database {
     }
     public String findUser(String userName){
         System.out.println(sjc.findEmployees(userName));
-        return sjc.findEmployees(userName).toString();
+        if(sjc.findEmployees(userName).toString().equals("null")){
+            System.out.println("einai null");
         }
+        return sjc.findEmployees(userName).toString();
+        
+        
     
+    }
 }

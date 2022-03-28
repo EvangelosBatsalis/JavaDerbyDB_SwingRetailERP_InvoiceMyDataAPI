@@ -5,8 +5,15 @@
  */
 package schoolerpinvoicemydata;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import schoolerpinvoicemydata.CRUD_Database;
 
 /**
@@ -38,12 +45,13 @@ public class MainWindowFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPasswordField = new javax.swing.JPasswordField();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButtonAddNewUser = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +72,13 @@ public class MainWindowFrame extends javax.swing.JFrame {
         jLabel4.setText("Password:");
 
         jLabel5.setText("UserName:");
+
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,11 +101,17 @@ public class MainWindowFrame extends javax.swing.JFrame {
                         .addGap(0, 2, Short.MAX_VALUE))
                     .addComponent(jPasswordField))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jButton3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
@@ -134,17 +155,17 @@ public class MainWindowFrame extends javax.swing.JFrame {
                 .addComponent(jLabel2))
         );
 
-        jButtonAddNewUser.setText("Add User");
-        jButtonAddNewUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddNewUserActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Add");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -155,19 +176,19 @@ public class MainWindowFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAddNewUser)
-                        .addGap(101, 101, 101))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))))
+                        .addGap(69, 69, 69))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton1)
+                                .addGap(68, 68, 68)
+                                .addComponent(jButton2))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(48, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,8 +199,8 @@ public class MainWindowFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAddNewUser)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap())
         );
 
@@ -188,25 +209,47 @@ public class MainWindowFrame extends javax.swing.JFrame {
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         // TODO add your handling code here:
+        String SELECT_QUERY = "SELECT * FROM SA.EMPLOYEE WHERE USERNAME = "+"'"+jTextFieldUserName.getText()+"'";
         System.out.println(jTextFieldUserName.getText());
         System.out.println(jPasswordField.getText());
+        if((jTextFieldUserName.getText().equals("")) || (jPasswordField.getText().equals(""))){
+            JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+        }else{
+            if(databaseRecordCheck() == true){
+                System.out.println("O xrhsths yparxei hdh");
+            }else{
+                try{
+                    Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+                    Statement stmt = con.createStatement();
+                    ResultSet result = stmt.executeQuery(SELECT_QUERY);
+                    System.out.println(result);
+                    while(result.next()){ 
+                    //    PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEE VALUES (?,?)");
+                    //    ps.setString(1, jTextFieldUserName.getText());
+                    //    ps.setString(2, jPasswordField.getText());
+                    //    ps.executeUpdate();
+                        String userName = result.getString("USERNAME");
+                        String password = result.getString("PASSWORD");
+                    
+                    if((result.getString("USERNAME").equals(jTextFieldUserName.getText())) && (result.getString("PASSWORD").equals(jPasswordField.getText()))){
+                        JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                        
+                    }
+                        //System.out.println("UserName: "+userName+ "\t"+ "Password: "+password);
+                    }
+
+
+                }catch(SQLException e){
+                    System.out.println(e);
+                }
+            }
+        }
     }//GEN-LAST:event_jButtonSubmitActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButtonCancelActionPerformed
-
-    private void jButtonAddNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNewUserActionPerformed
-        try {
-            // TODO add your handling code here:
-            CRUD_Database crudBD = new CRUD_Database();
-            crudBD.newUser(jTextFieldUserName.getText(),Integer.parseInt(jPasswordField.getText()));
-            
-        } catch (Exception ex) {
-            Logger.getLogger(MainWindowFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButtonAddNewUserActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             CRUD_Database crudBD = new CRUD_Database();
@@ -217,6 +260,43 @@ public class MainWindowFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        //String SELECT_QUERY = "INSERT INTO SA.EMPLOYEES VALUES (?,?)";
+        if((jTextFieldUserName.getText().equals("")) || (jPasswordField.getText().equals(""))){
+            JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+        }else{
+            if(databaseRecordCheck() == true){
+                System.out.println("O xrhsths yparxei hdh");
+            }else{
+                try{
+                    Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+                    Statement stmt = con.createStatement();
+                    //ResultSet result = stmt.executeQuery(SELECT_QUERY);
+                     //System.out.println(result);
+                    //while(result.next()){ 
+                        PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEE VALUES (?,?)");
+                        ps.setString(1, jTextFieldUserName.getText());
+                        ps.setString(2, jPasswordField.getText());
+                        ps.executeUpdate();
+                        //String userName = result.getString("USERNAME");
+                        //String password = result.getString("PASSWORD");
+                       //System.out.println("UserName: "+userName+ "\t"+ "Password: "+password);
+                    //}
+
+
+                }catch(SQLException e){
+                    System.out.println(e);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        databaseRecordCheck();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,10 +333,40 @@ public class MainWindowFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    private Boolean databaseRecordCheck(){
+        Boolean isEmpty = null;
+        String userName = jTextFieldUserName.getText();
+        String SELECT_QUERY = "SELECT * FROM SA.EMPLOYEES WHERE USERNAME = '"+userName+"'";//"SELECT * FROM SA.EMPLOYEES WHERE USERNAME = "+userName;
+        
+        try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery(SELECT_QUERY);
+            System.out.println(result);
+            if(result.next() == false){
+                System.out.println("den exei pragma");
+                isEmpty = false;
+            }else{
+                isEmpty = true;
+                do{ 
+                    String uname = result.getString("USERNAME");
+                    String password = result.getString("PASSWORD");
+                    System.out.println("UserName: "+userName+ "\t"+ "PassWord: "+password);
+                }while(result.next());
+            }
+            
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return isEmpty;
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonAddNewUser;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JLabel jLabel1;

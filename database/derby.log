@@ -1,0 +1,54 @@
+Mon Mar 28 13:55:57 EEST 2022 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Mon Mar 28 13:55:57 EEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-017f-d02b-101d-0000449323af 
+on database directory C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPIa with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_111/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_111-b14
+user.dir=C:\Program Files\Java\jdk1.8.0_111\db
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Mar 28 13:56:49 EEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance f55fc0a6-017f-d02b-101d-0000449323af 
+on database directory C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPI with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_111/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_111-b14
+user.dir=C:\Program Files\Java\jdk1.8.0_111\db
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Mar 28 13:56:50 EEST 2022:
+Shutting down instance f55fc0a6-017f-d02b-101d-0000449323af on database directory C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPI with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Mon Mar 28 13:56:50 EEST 2022 Thread[DRDAConnThread_2,5,main] (DATABASE = InvoiceMyDataAPI), (DRDAID = {3}), Database 'InvoiceMyDataAPI' shutdown.
+----------------------------------------------------------------
+Mon Mar 28 13:56:56 EEST 2022:
+Shutting down instance a816c00e-017f-d02b-101d-0000449323af on database directory C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPIa with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Mon Mar 28 13:56:56 EEST 2022 Thread[DRDAConnThread_2,5,main] (DATABASE = InvoiceMyDataAPIa), (DRDAID = {4}), Database 'InvoiceMyDataAPIa' shutdown.
+----------------------------------------------------------------
+Mon Mar 28 13:56:59 EEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance 0b198144-017f-d02b-101d-0000449323af 
+on database directory C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPI with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_111/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_111-b14
+user.dir=C:\Program Files\Java\jdk1.8.0_111\db
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Mar 28 17:01:48 EEST 2022: Shutting down Derby engine
+----------------------------------------------------------------
+Mon Mar 28 17:01:48 EEST 2022:
+Shutting down instance 0b198144-017f-d02b-101d-0000449323af on database directory C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPI with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+----------------------------------------------------------------

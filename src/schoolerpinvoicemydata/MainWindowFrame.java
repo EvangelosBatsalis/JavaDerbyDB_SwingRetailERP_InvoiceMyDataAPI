@@ -21,7 +21,6 @@ import schoolerpinvoicemydata.CRUD_Database;
  * @author User
  */
 public class MainWindowFrame extends javax.swing.JFrame {
-
     /**
      * Creates new form MainWindowFrame
      */
@@ -161,21 +160,21 @@ public class MainWindowFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(48, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(44, 44, 44))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(44, 44, 44))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(48, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,10 +194,7 @@ public class MainWindowFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            CRUD_Database crudBD = new CRUD_Database();
-            if(crudBD.findUser(jTextFieldUserName.getText()).equals(null)){
-                
-            }
+            Boolean kati = passwordValidationCheck();
             
         
         
@@ -207,33 +203,37 @@ public class MainWindowFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //String SELECT_QUERY = "INSERT INTO SA.EMPLOYEES VALUES (?,?)";
-        if((jTextFieldUserName.getText().equals("")) || (jPasswordField.getText().equals(""))){
-            JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-        }else{
-            if(databaseRecordCheck() == true){
-                JOptionPane.showMessageDialog(null, "UserName already exists. Please enter a new one", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-            }else{
-                try{
-                    Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-                    Statement stmt = con.createStatement();
-                    //ResultSet result = stmt.executeQuery(SELECT_QUERY);
-                     //System.out.println(result);
-                    //while(result.next()){ 
-                        PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEE VALUES (?,?)");
-                        ps.setString(1, jTextFieldUserName.getText());
-                        ps.setString(2, jPasswordField.getText());
-                        ps.executeUpdate();
-                        //String userName = result.getString("USERNAME");
-                        //String password = result.getString("PASSWORD");
-                       //System.out.println("UserName: "+userName+ "\t"+ "Password: "+password);
-                    //}
+                if((jTextFieldUserName.getText().equals("")) || (jPasswordField.getText().equals(""))){
+                    JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                }else if(passwordValidationCheck() == true){
+                
+                    if(databaseRecordCheck() == true){
+                        JOptionPane.showMessageDialog(null, "UserName already exists. Please enter a new one", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        try{
+                            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+                            Statement stmt = con.createStatement();
+                            //ResultSet result = stmt.executeQuery(SELECT_QUERY);
+                             //System.out.println(result);
+                            //while(result.next()){ 
+                            PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEES VALUES (?,?)");
+                            ps.setString(1, jTextFieldUserName.getText());
+                            ps.setString(2, jPasswordField.getText());
+                            ps.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Username created succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                            jTextFieldUserName.setText("");
+                            jPasswordField.setText("");
+                                //String userName = result.getString("USERNAME");
+                                //String password = result.getString("PASSWORD");
+                               //System.out.println("UserName: "+userName+ "\t"+ "Password: "+password);
+                            //}
 
 
-                }catch(SQLException e){
-                    System.out.println(e);
+                        }catch(SQLException e){
+                            System.out.println(e);
+                        }
                 }
             }
-        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
@@ -269,9 +269,13 @@ public class MainWindowFrame extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null, "Welcome admin...all features are unlocked", this.getTitle(), JOptionPane.WARNING_MESSAGE);
                                 jButton1.setEnabled(true);
                                 jButton2.setEnabled(true);
+                                jTextFieldUserName.setText("");
+                                jPasswordField.setText("");
                                 
                             }else{
-                                JOptionPane.showMessageDialog(null, "Login OK...", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Welcome "+jTextFieldUserName.getText(), this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                                jTextFieldUserName.setText("");
+                                jPasswordField.setText("");
                                 StageOne so = new StageOne();
                                 so.pack();
                                 so.setLocationRelativeTo(null);
@@ -330,7 +334,7 @@ public class MainWindowFrame extends javax.swing.JFrame {
     }
     
     private Boolean databaseRecordCheck(){
-        Boolean isEmpty = null;
+        Boolean isEmpty = false;
         String userName = jTextFieldUserName.getText();
         String SELECT_QUERY = "SELECT * FROM SA.EMPLOYEES WHERE USERNAME = '"+userName+"'";//"SELECT * FROM SA.EMPLOYEES WHERE USERNAME = "+userName;
         
@@ -339,14 +343,15 @@ public class MainWindowFrame extends javax.swing.JFrame {
             Statement stmt = con.createStatement();
             ResultSet result = stmt.executeQuery(SELECT_QUERY);
             System.out.println(result);
+            System.out.println(isEmpty);
             if(result.next() == false){
-                System.out.println("den exei pragma");
                 isEmpty = false;
             }else{
                 isEmpty = true;
                 do{ 
                     String uname = result.getString("USERNAME");
                     String password = result.getString("PASSWORD");
+                    System.out.println(isEmpty);
                     System.out.println("UserName: "+userName+ "\t"+ "PassWord: "+password);
                 }while(result.next());
             }
@@ -355,6 +360,27 @@ public class MainWindowFrame extends javax.swing.JFrame {
             System.out.println(e);
         }
         return isEmpty;
+        
+    }
+    
+    private Boolean passwordValidationCheck(){
+        Boolean isNumber = false;
+        while(true){
+            try{
+                Integer.parseInt(jPasswordField.getText());
+                //JOptionPane.showMessageDialog(null, "Password Accepted", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                isNumber = true;
+                break;
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Only numbers are allowed", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                isNumber = false;
+                break;
+            }
+        }
+        
+        
+        return isNumber;
+        
         
     }
 

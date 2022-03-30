@@ -188,26 +188,34 @@ public class adminMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNewUserActionPerformed
 
     private void jButtonDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteUserActionPerformed
-        // TODO add your handling code here:
+        int passwordField1 = Integer.parseInt(jPasswordField.getText());
+        int passwordField2 = Integer.parseInt(jPasswordField1.getText());
+        System.out.println(passwordField1 +"\t"+passwordField2);
+        
+        String UPDATE_QUERY = "DELETE FROM SA.EMPLOYEES WHERE USERNAME = ?";
         if((jTextFieldUserName.getText().equals("")) || (jPasswordField.getText().equals(""))){
             JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-        }else if((passwordValidationCheck() == true) ||(passwordValidationCheckReEnter() == true) ){
-        }else if(Integer.parseInt(jPasswordField.getText())== Integer.parseInt(jPasswordField1.getText())){
+        }else if((passwordValidationCheck() != true) ||(passwordValidationCheckReEnter() != true) ){
+            System.out.println("okkkk");
+        }else if(passwordField1 != passwordField2){
             JOptionPane.showMessageDialog(null, "Passwords don't match.. please re-enter correctly", this.getTitle(), JOptionPane.WARNING_MESSAGE);
         }else{
-            if(databaseRecordCheck() == true){
-                JOptionPane.showMessageDialog(null, "UserName already exists. Please enter a new one", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+            if(databaseRecordCheck() != true){
+                JOptionPane.showMessageDialog(null, "Cannot find User Name", this.getTitle(), JOptionPane.WARNING_MESSAGE);
             }else{
                 try{
                     Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-//                    Statement stmt = con.createStatement();
-                    PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEES VALUES (?,?)");
-                    ps.setString(1, jTextFieldUserName.getText());
-                    ps.setString(2, jPasswordField.getText());
-                    ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Username created succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-                    jTextFieldUserName.setText("");
-                    jPasswordField.setText("");
+                            PreparedStatement ps = con.prepareStatement(UPDATE_QUERY);
+                            ps.setString(1, jTextFieldUserName.getText());
+                            int dialogButton = 0;
+                            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this user?","Warning",dialogButton);
+                            if(dialogResult == JOptionPane.YES_OPTION){
+                            ps.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "user "+jTextFieldUserName+" deleted succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                            jTextFieldUserName.setText("");
+                            jPasswordField.setText("");
+                            jPasswordField1.setText("");
+                        }
                 }catch(SQLException e){
                     System.out.println(e);
                 }

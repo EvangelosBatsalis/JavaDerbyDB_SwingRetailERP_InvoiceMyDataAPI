@@ -12,3 +12,5 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Mar 30 16:11:32 EEST 2022: Shutting down Derby engine

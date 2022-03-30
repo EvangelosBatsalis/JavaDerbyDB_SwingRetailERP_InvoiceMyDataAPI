@@ -175,10 +175,10 @@ public class adminMainFrame extends javax.swing.JFrame {
                     ps.setString(1, jTextFieldUserName.getText());
                     ps.setString(2, jPasswordField.getText());
                     ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Username created succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "User created succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
                     jTextFieldUserName.setText("");
                     jPasswordField.setText("");
-                    jPasswordField.setText("");
+                    jPasswordField1.setText("");
 
                 }catch(SQLException e){
                     System.out.println(e);
@@ -208,13 +208,13 @@ public class adminMainFrame extends javax.swing.JFrame {
                             PreparedStatement ps = con.prepareStatement(UPDATE_QUERY);
                             ps.setString(1, jTextFieldUserName.getText());
                             int dialogButton = 0;
-                            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this user?","Warning",dialogButton);
+                            int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete user: "+jTextFieldUserName.getText()+" ?","Warning",dialogButton);
                             if(dialogResult == JOptionPane.YES_OPTION){
-                            ps.executeUpdate();
-                            JOptionPane.showMessageDialog(null, "user "+jTextFieldUserName+" deleted succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-                            jTextFieldUserName.setText("");
-                            jPasswordField.setText("");
-                            jPasswordField1.setText("");
+                                ps.executeUpdate();
+                                JOptionPane.showMessageDialog(null, "user "+jTextFieldUserName+" deleted succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                                jTextFieldUserName.setText("");
+                                jPasswordField.setText("");
+                                jPasswordField1.setText("");
                         }
                 }catch(SQLException e){
                     System.out.println(e);
@@ -246,11 +246,15 @@ public class adminMainFrame extends javax.swing.JFrame {
                         PreparedStatement ps = con.prepareStatement(UPDATE_QUERY);
                         ps.setInt(1,Integer.parseInt(jPasswordField.getText()));
                         ps.setString(2, jTextFieldUserName.getText());
-                        ps.executeUpdate();
-                        JOptionPane.showMessageDialog(null, "Password changed succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-                        jTextFieldUserName.setText("");
-                        jPasswordField.setText("");
-                        jPasswordField1.setText("");
+                        int dialogButton = 0;
+                        int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to change password to user: "+jTextFieldUserName.getText()+" ?","Warning",dialogButton);
+                        if(dialogResult == JOptionPane.YES_OPTION){
+                            ps.executeUpdate();
+                            JOptionPane.showMessageDialog(null, "Password changed succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                            jTextFieldUserName.setText("");
+                            jPasswordField.setText("");
+                            jPasswordField1.setText("");
+                        }
                 }catch(SQLException e){
                     System.out.println(e);
                 }

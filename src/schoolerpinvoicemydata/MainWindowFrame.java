@@ -213,7 +213,7 @@ public class MainWindowFrame extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(null, "Welcome "+jTextFieldUserName.getText(), this.getTitle(), JOptionPane.WARNING_MESSAGE);
                                 jTextFieldUserName.setText("");
                                 jPasswordField.setText("");
-                                StageOne so = new StageOne();
+                                StageOneUserNameSelection so = new StageOneUserNameSelection();
                                 //so.setAlwaysOnTop(true);
                                 so.pack();
                                 so.setLocationRelativeTo(null);

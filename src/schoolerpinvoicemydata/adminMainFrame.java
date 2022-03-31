@@ -46,6 +46,7 @@ public class adminMainFrame extends javax.swing.JFrame {
         jButtonNewUser = new javax.swing.JButton();
         jButtonDeleteUser = new javax.swing.JButton();
         jButtonUpdatePassword = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,11 +120,18 @@ public class adminMainFrame extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(jButtonNewUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
@@ -131,6 +139,10 @@ public class adminMainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonDeleteUser)
                 .addGap(70, 70, 70))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(84, 84, 84)
@@ -145,7 +157,9 @@ public class adminMainFrame extends javax.swing.JFrame {
                     .addComponent(jButtonNewUser)
                     .addComponent(jButtonDeleteUser)
                     .addComponent(jButtonUpdatePassword))
-                .addGap(37, 37, 37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(62, 62, 62)
@@ -174,12 +188,15 @@ public class adminMainFrame extends javax.swing.JFrame {
                     PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEES VALUES (?,?)");
                     ps.setString(1, jTextFieldUserName.getText());
                     ps.setString(2, jPasswordField.getText());
-                    ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "User created succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-                    jTextFieldUserName.setText("");
-                    jPasswordField.setText("");
-                    jPasswordField1.setText("");
-
+                    int dialogButton = 0;
+                    int dialogResult = JOptionPane.showConfirmDialog (null, "add user: "+jTextFieldUserName.getText()+" ?","Warning",dialogButton);
+                    if(dialogResult == JOptionPane.YES_OPTION){
+                        ps.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "User created succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                        jTextFieldUserName.setText("");
+                        jPasswordField.setText("");
+                        jPasswordField1.setText("");
+                    }
                 }catch(SQLException e){
                     System.out.println(e);
                 }
@@ -247,7 +264,7 @@ public class adminMainFrame extends javax.swing.JFrame {
                         ps.setInt(1,Integer.parseInt(jPasswordField.getText()));
                         ps.setString(2, jTextFieldUserName.getText());
                         int dialogButton = 0;
-                        int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to change password to user: "+jTextFieldUserName.getText()+" ?","Warning",dialogButton);
+                        int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to change password for user: "+jTextFieldUserName.getText()+" ?","Warning",dialogButton);
                         if(dialogResult == JOptionPane.YES_OPTION){
                             ps.executeUpdate();
                             JOptionPane.showMessageDialog(null, "Password changed succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
@@ -261,6 +278,24 @@ public class adminMainFrame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButtonUpdatePasswordActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        String UPDATE_QUERY = "SELECT * FROM SA.EMPLOYEES";
+        try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+            PreparedStatement ps = con.prepareStatement(UPDATE_QUERY);
+            ps.setInt(1,Integer.parseInt(jPasswordField.getText()));
+            ps.setString(2, jTextFieldUserName.getText());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Password changed succesfully", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+            jTextFieldUserName.setText("");
+        
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,6 +405,7 @@ public class adminMainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDeleteUser;
     private javax.swing.JButton jButtonNewUser;
     private javax.swing.JButton jButtonUpdatePassword;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

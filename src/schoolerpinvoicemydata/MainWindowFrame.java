@@ -69,7 +69,7 @@ public class MainWindowFrame extends javax.swing.JFrame {
 
         jLabel5.setText("UserName:");
 
-        jLabel2.setText("Please enter credential to continue");
+        jLabel2.setText("Please enter credential to continue:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

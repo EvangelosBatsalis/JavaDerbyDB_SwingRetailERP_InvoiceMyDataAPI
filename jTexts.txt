@@ -20,3 +20,46 @@ jButtonSaveRecord
 jButtonEditRecord
 jButtonLogout
 jButtonExit
+
+INSERT INTO SA.STUDENTS (CUSTOMERID,STUDENTFIRSTNAME,STUDENTLASTNAME,PARENTFIRSTNAME,PARENTLASTNAME,ADDRESS,POSTACODE,AREA,PHONENUMBER1,PHONENUMBER2,PHONENUMBER3,EMAIL1,EMAIL2)
+VALUES ();
+
+INSERT INTO SA.STUDENTS (STUDENTFIRSTNAME,STUDENTLASTNAME,PARENTFIRSTNAME,PARENTLASTNAME,ADDRESS,POSTALCODE,AREA,PHONENUMBER1,PHONENUMBER2,PHONENUMBER3,EMAIL1,EMAIL2)
+VALUES ('Vag','Bat','kyr','kris','Per 53',15342,'ag parask',6943232609,2102477607,'vbat');
+
+ try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEES VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps.setString(1, jTextStudentFirstName.getText());
+            ps.setString(2, jTextStudentLastName.getText());
+            ps.setString(3, jTextParentFirstName.getText());
+            ps.setString(4, jTextParentLastName.getText());
+            ps.setString(5, jTextAddress.getText());
+            ps.setString(6, jTextPostalCode.getText());
+            ps.setString(7, jTextArea.getText());
+            ps.setString(8, jTextPhoneNumber1.getText());
+            ps.setString(9, jTextPhoneNumber2.getText());
+            ps.setString(10, jTextPhoneNumber3.getText());
+            ps.setString(11, jTextEmail1.getText());
+            ps.setString(12, jTextEmail2.getText());
+            
+            int dialogButton = 0;
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Do you want to store the entry?","Warning",dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Entry updated succesfull!!", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+
+
+
+                jTextStudentFirstName.setEditable(false);
+                jTextStudentLastName.setEditable(false);
+                jTextParentFirstName.setEditable(false);
+                jTextParentLastName.setEditable(false);
+                jTextAddress.setEditable(false);
+                jTextPostalCode.setEditable(false);
+                jTextArea.setEditable(false);
+                jTextPhoneNumber1.setEditable(false);
+                jTextPhoneNumber2.setEditable(false);
+                jTextPhoneNumber3.setEditable(false);
+                jTextEmail1.setEditable(false);
+                jTextEmail2.setEditable(false);

@@ -5,16 +5,22 @@
  */
 package schoolerpinvoicemydata;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
  */
-public class StageTwoUserNameInfo extends javax.swing.JFrame {
+public class StageTwoDataUpdate extends javax.swing.JFrame {
 
     /**
      * Creates new form StageTwoUserNameInfo
      */
-    public StageTwoUserNameInfo() {
+    public StageTwoDataUpdate() {
         initComponents();
     }
 
@@ -391,11 +397,62 @@ public class StageTwoUserNameInfo extends javax.swing.JFrame {
 
     private void jButtonSaveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveRecordActionPerformed
         // TODO add your handling code here:
+        try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEES VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps.setString(1, jTextStudentFirstName.getText());
+            ps.setString(2, jTextStudentLastName.getText());
+            ps.setString(3, jTextParentFirstName.getText());
+            ps.setString(4, jTextParentLastName.getText());
+            ps.setString(5, jTextAddress.getText());
+            ps.setString(6, jTextPostalCode.getText());
+            ps.setString(7, jTextArea.getText());
+            ps.setString(8, jTextPhoneNumber1.getText());
+            ps.setString(9, jTextPhoneNumber2.getText());
+            ps.setString(10, jTextPhoneNumber3.getText());
+            ps.setString(11, jTextEmail1.getText());
+            ps.setString(12, jTextEmail2.getText());
+            
+            int dialogButton = 0;
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Do you want to store the entry?","Warning",dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Entry updated succesfull!!", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                jTextStudentFirstName.setEditable(false);
+                jTextStudentLastName.setEditable(false);
+                jTextParentFirstName.setEditable(false);
+                jTextParentLastName.setEditable(false);
+                jTextAddress.setEditable(false);
+                jTextPostalCode.setEditable(false);
+                jTextArea.setEditable(false);
+                jTextPhoneNumber1.setEditable(false);
+                jTextPhoneNumber2.setEditable(false);
+                jTextPhoneNumber3.setEditable(false);
+                jTextEmail1.setEditable(false);
+                jTextEmail2.setEditable(false);
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
         
     }//GEN-LAST:event_jButtonSaveRecordActionPerformed
 
     private void jButtonEditRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditRecordActionPerformed
         // TODO add your handling code here:
+        jTextCustomerID.setEditable(true);
+        jTextStudentFirstName.setEditable(true);
+        jTextStudentLastName.setEditable(true);
+        jTextParentFirstName.setEditable(true);
+        jTextParentLastName.setEditable(true);
+        jTextAddress.setEditable(true);
+        jTextPostalCode.setEditable(true);
+        jTextArea.setEditable(true);
+        jTextPhoneNumber1.setEditable(true);
+        jTextPhoneNumber2.setEditable(true);
+        jTextPhoneNumber3.setEditable(true);
+        jTextEmail1.setEditable(true);
+        jTextEmail2.setEditable(true);
+        
 //        jTextEmail1.setText("test");
 //        jTextEmail2.setText("test2");
 //        jTextCustomerID.setEditable(true);
@@ -418,20 +475,23 @@ public class StageTwoUserNameInfo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StageTwoUserNameInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StageTwoDataUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StageTwoUserNameInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StageTwoDataUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StageTwoUserNameInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StageTwoDataUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StageTwoUserNameInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StageTwoDataUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StageTwoUserNameInfo().setVisible(true);
+                new StageTwoDataUpdate().setVisible(true);
             }
         });
     }

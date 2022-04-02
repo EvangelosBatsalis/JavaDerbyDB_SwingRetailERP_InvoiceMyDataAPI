@@ -218,6 +218,7 @@ public class MainWindowFrame extends javax.swing.JFrame {
                                 so.pack();
                                 so.setLocationRelativeTo(null);
                                 so.setVisible(true); 
+                                 
                                 
                             }
                                 

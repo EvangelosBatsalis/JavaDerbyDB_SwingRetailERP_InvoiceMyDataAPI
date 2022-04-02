@@ -28,7 +28,7 @@ public class StageOneUserNameSelection extends javax.swing.JFrame {
         
         //added library for jcombo auto complete
         AutoCompleteDecorator.decorate(jComboBox1);
-        String SELECT_QUERY = "SELECT USERNAME FROM SA.EMPLOYEES ORDER BY USERNAME ASC";
+        String SELECT_QUERY = "SELECT StudentFirstName FROM SA.STUDENTS ORDER BY USERNAME ASC";
         
         try{
             Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
@@ -157,7 +157,7 @@ public class StageOneUserNameSelection extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        StageTwoUserNameInfo usernameInfo = new StageTwoUserNameInfo();
+        StageThreeDataEntry usernameInfo = new StageThreeDataEntry();
         usernameInfo.pack();
         usernameInfo.setLocationRelativeTo(null);
         usernameInfo.setVisible(true);  

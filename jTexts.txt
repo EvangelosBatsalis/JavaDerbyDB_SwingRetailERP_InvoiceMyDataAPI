@@ -63,3 +63,9 @@ VALUES ('Vag','Bat','kyr','kris','Per 53',15342,'ag parask',6943232609,210247760
                 jTextPhoneNumber3.setEditable(false);
                 jTextEmail1.setEditable(false);
                 jTextEmail2.setEditable(false);
+
+CREATE TABLE SA.TEST (ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+        FirstName VARCHAR(20) NOT NULL,
+        LastName VARCHAR(20),
+        Point REAL DEFAULT 0.0,
+        BirthDate DATE DEFAULT '1999-12-31');

@@ -8,7 +8,10 @@ package schoolerpinvoicemydata;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,12 +19,47 @@ import javax.swing.JOptionPane;
  * @author User
  */
 public class StageTwoDataUpdate extends javax.swing.JFrame {
+    private String resulta;
 
     /**
      * Creates new form StageTwoUserNameInfo
      */
     public StageTwoDataUpdate() {
         initComponents();
+        System.out.println("aaaa");
+        System.out.println(resulta);
+//        String[] splitResult = result.split(" ");
+  //      for (String kati:splitResult){
+    //        System.out.println(kati);
+      //  }
+        
+        //SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = 'as2' AND STUDENTLASTNAME = 'ss3';
+         String SELECT_QUERY = "";//"SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = '"+ splitResult.get(0)+ "' AND STUDENTLASTNAME = '"+splitResult.get(1)+"'";
+        
+        try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery(SELECT_QUERY);
+            System.out.println(result);
+            while(result.next()){
+                //jComboBox1.addItem(result.getString("STUDENTLASTNAME")+" "+result.getString("STUDENTFIRSTNAME"));//+" CustomerID: "+result.getString("CUSTOMERID")); 
+                jTextCustomerID.setText(result.getString("CUSTOMERID"));
+                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
+                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
+            
+            }
+        
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+    }
+
+    public String getResult() {
+        return resulta;
+    }
+
+    public void setResult(String resulta) {
+        this.resulta = resulta;
     }
 
     /**

@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 
@@ -28,7 +29,7 @@ public class StageOneUserNameSelection extends javax.swing.JFrame {
         
         //added library for jcombo auto complete
         AutoCompleteDecorator.decorate(jComboBox1);
-        String SELECT_QUERY = "SELECT StudentFirstName FROM SA.STUDENTS ORDER BY USERNAME ASC";
+        String SELECT_QUERY = "SELECT * FROM SA.STUDENTS ORDER BY STUDENTLASTNAME ASC";
         
         try{
             Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
@@ -36,10 +37,9 @@ public class StageOneUserNameSelection extends javax.swing.JFrame {
             ResultSet result = stmt.executeQuery(SELECT_QUERY);
             System.out.println(result);
             while(result.next()){
-                jComboBox1.addItem(result.getString("USERNAME"));
-                
+                jComboBox1.addItem(result.getString("STUDENTLASTNAME")+" "+result.getString("STUDENTFIRSTNAME"));//+" CustomerID: "+result.getString("CUSTOMERID")); 
             }
-
+            
             
         }catch(SQLException e){
             System.out.println(e);
@@ -145,10 +145,15 @@ public class StageOneUserNameSelection extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        System.out.println(jComboBox1.getSelectedItem());
+        System.out.println(jComboBox1.getSelectedIndex());
+        //String kati = jComboBox1.getSelectedItem();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -157,10 +162,16 @@ public class StageOneUserNameSelection extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        StageThreeDataEntry usernameInfo = new StageThreeDataEntry();
+        StageTwoDataUpdate usernameInfo = new StageTwoDataUpdate();
         usernameInfo.pack();
         usernameInfo.setLocationRelativeTo(null);
-        usernameInfo.setVisible(true);  
+        usernameInfo.setVisible(true);
+        //System.out.println(jComboBox1.getSelectedItem());
+        String resulta = jComboBox1.getSelectedItem().toString();
+        usernameInfo.setResult(resulta);
+        System.out.println(resulta);
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

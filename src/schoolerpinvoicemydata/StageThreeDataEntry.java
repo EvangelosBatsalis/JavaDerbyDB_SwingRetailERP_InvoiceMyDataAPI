@@ -106,6 +106,7 @@ public class StageThreeDataEntry extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTextCustomerID.setEditable(false);
         jTextCustomerID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jTextStudentFirstName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

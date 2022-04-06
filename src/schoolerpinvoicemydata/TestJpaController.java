@@ -14,15 +14,14 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import schoolerpinvoicemydata.exceptions.NonexistentEntityException;
-import schoolerpinvoicemydata.exceptions.PreexistingEntityException;
 
 /**
  *
  * @author vbat
  */
-public class EmployeesJpaController implements Serializable {
+public class TestJpaController implements Serializable {
 
-    public EmployeesJpaController(EntityManagerFactory emf) {
+    public TestJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,18 +30,13 @@ public class EmployeesJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Employees employees) throws PreexistingEntityException, Exception {
+    public void create(Test test) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(employees);
+            em.persist(test);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findEmployees(employees.getUsername()) != null) {
-                throw new PreexistingEntityException("Employees " + employees + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -50,19 +44,19 @@ public class EmployeesJpaController implements Serializable {
         }
     }
 
-    public void edit(Employees employees) throws NonexistentEntityException, Exception {
+    public void edit(Test test) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            employees = em.merge(employees);
+            test = em.merge(test);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = employees.getUsername();
-                if (findEmployees(id) == null) {
-                    throw new NonexistentEntityException("The employees with id " + id + " no longer exists.");
+                Integer id = test.getAutoid();
+                if (findTest(id) == null) {
+                    throw new NonexistentEntityException("The test with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,19 +67,19 @@ public class EmployeesJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Employees employees;
+            Test test;
             try {
-                employees = em.getReference(Employees.class, id);
-                employees.getUsername();
+                test = em.getReference(Test.class, id);
+                test.getAutoid();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The employees with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The test with id " + id + " no longer exists.", enfe);
             }
-            em.remove(employees);
+            em.remove(test);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,19 +88,19 @@ public class EmployeesJpaController implements Serializable {
         }
     }
 
-    public List<Employees> findEmployeesEntities() {
-        return findEmployeesEntities(true, -1, -1);
+    public List<Test> findTestEntities() {
+        return findTestEntities(true, -1, -1);
     }
 
-    public List<Employees> findEmployeesEntities(int maxResults, int firstResult) {
-        return findEmployeesEntities(false, maxResults, firstResult);
+    public List<Test> findTestEntities(int maxResults, int firstResult) {
+        return findTestEntities(false, maxResults, firstResult);
     }
 
-    private List<Employees> findEmployeesEntities(boolean all, int maxResults, int firstResult) {
+    private List<Test> findTestEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Employees.class));
+            cq.select(cq.from(Test.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,20 +112,20 @@ public class EmployeesJpaController implements Serializable {
         }
     }
 
-    public Employees findEmployees(String id) {
+    public Test findTest(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Employees.class, id);
+            return em.find(Test.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getEmployeesCount() {
+    public int getTestCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Employees> rt = cq.from(Employees.class);
+            Root<Test> rt = cq.from(Test.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

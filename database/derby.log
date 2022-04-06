@@ -1,7 +1,7 @@
-Mon Apr 04 11:30:29 EEST 2022 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+Wed Apr 06 15:21:16 EEST 2022 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Apr 04 11:44:03 EEST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-017f-f3b2-6567-0000449323af 
+Wed Apr 06 15:21:21 EEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-017f-fed2-6966-0000449323af 
 on database directory C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPI with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
 Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_111/db/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -13,5 +13,4 @@ os.version=10.0
 derby.system.home=C:\Users\vbat\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database
 Database Class Loader started - derby.database.classpath=''
 ----------------------------------------------------------------
-Mon Apr 04 16:53:00 EEST 2022: Shutting down Derby engine
-----------------------------------------------------------------
+Wed Apr 06 17:02:20 EEST 2022: Shutting down Derby engine

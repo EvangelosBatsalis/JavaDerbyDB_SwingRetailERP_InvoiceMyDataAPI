@@ -14,7 +14,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import schoolerpinvoicemydata.CRUD_Database;
 
 /**
  *
@@ -306,8 +305,7 @@ public class MainWindowFrame extends javax.swing.JFrame {
     private Boolean passwordValidationCheck(){
         Boolean isNumber = false;
         while(true){
-            try{
-                Integer.parseInt(jPasswordField.getText());
+            try{                Integer.parseInt(jPasswordField.getText());
                 //JOptionPane.showMessageDialog(null, "Password Accepted", this.getTitle(), JOptionPane.WARNING_MESSAGE);
                 isNumber = true;
                 break;

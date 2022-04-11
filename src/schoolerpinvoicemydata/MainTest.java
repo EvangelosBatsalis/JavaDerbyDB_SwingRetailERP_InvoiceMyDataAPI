@@ -26,7 +26,7 @@ public class MainTest {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPIPU");
         EntityManager em = emf.createEntityManager();
         //TestJpaController tjc = new TestJpaController(emf);
-        System.out.println(em.find(Test.class, 1));
+
         
     }
     

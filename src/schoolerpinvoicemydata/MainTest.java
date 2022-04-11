@@ -7,6 +7,7 @@ package schoolerpinvoicemydata;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -22,10 +23,10 @@ public class MainTest {
         System.out.println("hi");
     
         Test test = new Test();
-        EntityManagerFactory emf = new EntityManagerFactory("JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPIPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPIPU");
         EntityManager em = emf.createEntityManager();
-        TestJpaController tjc = new TestJpaController(emf);
-        
+        //TestJpaController tjc = new TestJpaController(emf);
+        System.out.println(em.find(Test.class, 1));
         
     }
     

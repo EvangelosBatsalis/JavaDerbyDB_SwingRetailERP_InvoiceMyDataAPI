@@ -5,9 +5,11 @@
  */
 package schoolerpinvoicemydata;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,8 +27,11 @@ public class MainTest {
         Test test = new Test();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPIPU");
         EntityManager em = emf.createEntityManager();
-        //TestJpaController tjc = new TestJpaController(emf);
-
+        TestJpaController tjc = new TestJpaController(emf);
+        Query query = em.createNamedQuery("Test.findAll");
+        List results = query.getResultList();
+        System.out.println(query.toString());
+        System.out.println(results.toString());
         
     }
     

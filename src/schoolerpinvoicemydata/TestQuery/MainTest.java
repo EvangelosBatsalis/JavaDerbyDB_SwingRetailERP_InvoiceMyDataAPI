@@ -33,7 +33,15 @@ public class MainTest {
         List<Test> test = em.createNamedQuery("Test.findAll").getResultList();  
         System.out.println(test);
         
+        TestJpaController jpa = new TestJpaController(emf);
+        System.out.println(jpa.getTestCount());
+    
+        Test t1 = new Test("aaa","bbb",111);
+        jpa.create(t1);
         
+    
     }
+    
+    
     
 }

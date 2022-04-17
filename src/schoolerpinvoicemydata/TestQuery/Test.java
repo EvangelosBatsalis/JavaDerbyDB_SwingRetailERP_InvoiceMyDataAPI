@@ -45,8 +45,7 @@ public class Test implements Serializable {
     @Column(name = "NUMBER")
     private Integer number;
 
-    public Test() {
-    }
+    
 
     public Test(Integer autoid) {
         this.autoid = autoid;
@@ -62,6 +61,12 @@ public class Test implements Serializable {
 
     public String getTest1() {
         return test1;
+    }
+
+    public Test(String test1, String test2, Integer number) {
+        this.test1 = test1;
+        this.test2 = test2;
+        this.number = number;
     }
 
     public void setTest1(String test1) {

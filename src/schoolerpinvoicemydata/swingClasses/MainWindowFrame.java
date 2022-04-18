@@ -13,19 +13,31 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import schoolerpinvoicemydata.controllers.EmployeeJpaController;
 
 /**
  *
  * @author User
  */
 public class MainWindowFrame extends javax.swing.JFrame {
+    static EntityManagerFactory emf;
+    static EntityManager em;
+    static EmployeeJpaController ejpa;
     /**
      * Creates new form MainWindowFrame
      */
     public MainWindowFrame() {
         initComponents();
-    }
+        emf = Persistence.createEntityManagerFactory("JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPIPU");
+        em = emf.createEntityManager();
+                
+        EmployeeJpaController ejpa = new EmployeeJpaController(emf);
+       
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -177,7 +189,8 @@ public class MainWindowFrame extends javax.swing.JFrame {
         if((jTextFieldUserName.getText().equals("")) || (jPasswordField.getText().equals(""))){
             JOptionPane.showMessageDialog(null, "Username or Password field is empty", this.getTitle(), JOptionPane.WARNING_MESSAGE);
         }else{
-            if(databaseRecordCheck() == false){
+            //if(databaseRecordCheck() == false){
+            if(ejpa.getDatabaseRecordCheck(jTextFieldUserName.getText()) == false){
                 JOptionPane.showMessageDialog(null, "UserName is Incorrect", this.getTitle(), JOptionPane.WARNING_MESSAGE);
             }else{
                 try{

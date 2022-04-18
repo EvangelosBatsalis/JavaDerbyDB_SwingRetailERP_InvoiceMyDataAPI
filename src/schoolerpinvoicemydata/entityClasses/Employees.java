@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package entityClasses;
+package schoolerpinvoicemydata.entityClasses;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -19,14 +19,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author vbat
  */
 @Entity
-@Table(name = "EMPLOYEE")
+@Table(name = "EMPLOYEES")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e"),
-    @NamedQuery(name = "Employee.findByUsername", query = "SELECT e FROM Employee e WHERE e.username = :username"),
-    @NamedQuery(name = "Employee.findByPassword", query = "SELECT e FROM Employee e WHERE e.password = :password"),
-    @NamedQuery(name = "Employee.findByAdminaccess", query = "SELECT e FROM Employee e WHERE e.adminaccess = :adminaccess")})
-public class Employee implements Serializable {
+    @NamedQuery(name = "Employees.findAll", query = "SELECT e FROM Employees e"),
+    @NamedQuery(name = "Employees.findByUsername", query = "SELECT e FROM Employees e WHERE e.username = :username"),
+    @NamedQuery(name = "Employees.findByPassword", query = "SELECT e FROM Employees e WHERE e.password = :password")})
+public class Employees implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,21 +33,13 @@ public class Employee implements Serializable {
     @Column(name = "USERNAME")
     private String username;
     @Column(name = "PASSWORD")
-    private String password;
-    @Basic(optional = false)
-    @Column(name = "ADMINACCESS")
-    private Boolean adminaccess;
+    private Integer password;
 
-    public Employee() {
+    public Employees() {
     }
 
-    public Employee(String username) {
+    public Employees(String username) {
         this.username = username;
-    }
-
-    public Employee(String username, Boolean adminaccess) {
-        this.username = username;
-        this.adminaccess = adminaccess;
     }
 
     public String getUsername() {
@@ -59,20 +50,12 @@ public class Employee implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
+    public Integer getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Integer password) {
         this.password = password;
-    }
-
-    public Boolean getAdminaccess() {
-        return adminaccess;
-    }
-
-    public void setAdminaccess(Boolean adminaccess) {
-        this.adminaccess = adminaccess;
     }
 
     @Override
@@ -85,10 +68,10 @@ public class Employee implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Employee)) {
+        if (!(object instanceof Employees)) {
             return false;
         }
-        Employee other = (Employee) object;
+        Employees other = (Employees) object;
         if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
             return false;
         }
@@ -97,7 +80,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolerpinvoicemydata.Employee[ username=" + username + " ]";
+        return "schoolerpinvoicemydata.Employees[ username=" + username + " ]";
     }
     
 }

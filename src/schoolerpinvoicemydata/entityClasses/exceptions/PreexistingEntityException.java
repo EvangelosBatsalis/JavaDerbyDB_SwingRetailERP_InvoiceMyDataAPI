@@ -1,4 +1,4 @@
-package entityClasses.exceptions;
+package schoolerpinvoicemydata.entityClasses.exceptions;
 
 public class PreexistingEntityException extends Exception {
     public PreexistingEntityException(String message, Throwable cause) {

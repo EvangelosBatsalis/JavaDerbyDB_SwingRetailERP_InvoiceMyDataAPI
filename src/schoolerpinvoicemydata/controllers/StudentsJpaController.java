@@ -4,9 +4,14 @@
  */
 package schoolerpinvoicemydata.controllers;
 
-import entityClasses.Students;
-import entityClasses.exceptions.NonexistentEntityException;
+import schoolerpinvoicemydata.entityClasses.Students;
+import schoolerpinvoicemydata.entityClasses.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,12 +19,16 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author vbat
  */
 public class StudentsJpaController implements Serializable {
+    
+    String UrlConnection = "jdbc:derby://localhost:1527/InvoiceMyDataAPI";
+    String DBuserName = "sa";
+    String DBpassWord = "sa";
 
     public StudentsJpaController(EntityManagerFactory emf) {
         this.emf = emf;
@@ -132,6 +141,57 @@ public class StudentsJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    //Custom SQL Queries through Controller
+    private Boolean databaseRecordCheck(String jTextFieldUserName){
+        Boolean isEmpty = false;
+        String SELECT_QUERY = "SELECT * FROM SA.EMPLOYEES WHERE USERNAME = '"+jTextFieldUserName+"'";//"SELECT * FROM SA.EMPLOYEES WHERE USERNAME = "+userName;
+                
+        try{
+            Connection con = DriverManager.getConnection(UrlConnection,DBuserName,DBpassWord);
+            Statement stmt = con.createStatement();
+            ResultSet result = stmt.executeQuery(SELECT_QUERY);
+            System.out.println(result);
+            System.out.println(isEmpty);
+            if(result.next() == false){
+                isEmpty = false;
+            }else{
+                isEmpty = true;
+                do{ 
+                    String uname = result.getString("USERNAME");
+                    String password = result.getString("PASSWORD");
+                    System.out.println(isEmpty);
+                    System.out.println("UserName: "+jTextFieldUserName+ "\t"+ "PassWord: "+password);
+                }while(result.next());
+            }
+            
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return isEmpty;
+        
+    }
+    
+    private Boolean passwordValidationCheck(String jPasswordField){
+        Boolean isNumber = false;
+        while(true){
+            try{                
+                Integer.parseInt(jPasswordField);
+                //JOptionPane.showMessageDialog(null, "Password Accepted", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                isNumber = true;
+                break;
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Only numbers are allowed", "warning", JOptionPane.WARNING_MESSAGE);
+                isNumber = false;
+                break;
+            }
+        }
+        
+        
+        return isNumber;
+        
+        
     }
     
 }

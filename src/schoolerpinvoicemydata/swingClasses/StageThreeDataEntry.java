@@ -3,63 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schoolerpinvoicemydata;
+package schoolerpinvoicemydata.swingClasses;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author User
  */
-public class StageTwoDataUpdate extends javax.swing.JFrame {
-    private String resulta;
+public class StageThreeDataEntry extends javax.swing.JFrame {
 
     /**
      * Creates new form StageTwoUserNameInfo
      */
-    public StageTwoDataUpdate() {
+    public StageThreeDataEntry() {
         initComponents();
-        System.out.println("aaaa");
-        System.out.println(resulta);
-//        String[] splitResult = result.split(" ");
-  //      for (String kati:splitResult){
-    //        System.out.println(kati);
-      //  }
-        
-        //SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = 'as2' AND STUDENTLASTNAME = 'ss3';
-         String SELECT_QUERY = "";//"SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = '"+ splitResult.get(0)+ "' AND STUDENTLASTNAME = '"+splitResult.get(1)+"'";
-        
-        try{
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-            Statement stmt = con.createStatement();
-            ResultSet result = stmt.executeQuery(SELECT_QUERY);
-            System.out.println(result);
-            while(result.next()){
-                //jComboBox1.addItem(result.getString("STUDENTLASTNAME")+" "+result.getString("STUDENTFIRSTNAME"));//+" CustomerID: "+result.getString("CUSTOMERID")); 
-                jTextCustomerID.setText(result.getString("CUSTOMERID"));
-                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
-                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
-            
-            }
-        
-        }catch(SQLException e){
-            System.out.println(e);
-        }
-    }
-
-    public String getResult() {
-        return resulta;
-    }
-
-    public void setResult(String resulta) {
-        this.resulta = resulta;
     }
 
     /**
@@ -73,10 +35,9 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
 
         jLabel16 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButtonSaveRecord = new javax.swing.JButton();
         jButtonLogout = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
-        jButtonEditRecord = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTextCustomerID = new javax.swing.JTextField();
         jTextStudentFirstName = new javax.swing.JTextField();
@@ -104,35 +65,20 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextGeneralNote = new javax.swing.JTextArea();
-        jTextSnote = new javax.swing.JTextField();
-        datePickerSDate = new com.github.lgooddatepicker.components.DatePicker();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButtonSaveRecord.setText("Save Record");
-        jButtonSaveRecord.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLogout.setText("Back");
+
+        jButtonExit.setText("Logout");
+
+        jButton1.setText("Add New Record");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveRecordActionPerformed(evt);
-            }
-        });
-
-        jButtonLogout.setText("Logout");
-
-        jButtonExit.setText("Exit");
-
-        jButtonEditRecord.setText("Edit Record");
-        jButtonEditRecord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditRecordActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -142,68 +88,49 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButtonSaveRecord)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(jButtonLogout)
-                        .addGap(53, 53, 53)
-                        .addComponent(jButtonExit))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButtonEditRecord)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonLogout)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonExit)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSaveRecord)
                     .addComponent(jButtonLogout)
+                    .addComponent(jButton1)
                     .addComponent(jButtonExit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEditRecord)
                 .addContainerGap())
         );
 
         jTextCustomerID.setEditable(false);
         jTextCustomerID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextStudentFirstName.setEditable(false);
         jTextStudentFirstName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextStudentLastName.setEditable(false);
         jTextStudentLastName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextParentFirstName.setEditable(false);
         jTextParentFirstName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextAddress.setEditable(false);
         jTextAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextParentLastName.setEditable(false);
         jTextParentLastName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextPostalCode.setEditable(false);
         jTextPostalCode.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextPhoneNumber1.setEditable(false);
         jTextPhoneNumber1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextArea.setEditable(false);
         jTextArea.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextPhoneNumber2.setEditable(false);
         jTextPhoneNumber2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextPhoneNumber3.setEditable(false);
         jTextPhoneNumber3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextEmail1.setEditable(false);
         jTextEmail1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jTextEmail2.setEditable(false);
         jTextEmail2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel1.setText("Customer ID:");
@@ -346,76 +273,9 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTextGeneralNote.setColumns(20);
-        jTextGeneralNote.setRows(5);
-        jTextGeneralNote.setBackground(new java.awt.Color(204, 255, 255));
-        jTextGeneralNote.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jScrollPane1.setViewportView(jTextGeneralNote);
-
-        jTextSnote.setBackground(new java.awt.Color(204, 255, 255));
-
-        datePickerSDate.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setText("General Note:");
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel15.setText("SDate");
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel17.setText("SNote");
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datePickerSDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel17)
-                            .addComponent(jTextSnote, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextSnote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(datePickerSDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,33 +283,40 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(36, 36, 36)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonSaveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveRecordActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try{
+                try{
             Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-            PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEES VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO SA.STUDENTS (STUDENTFIRSTNAME,STUDENTLASTNAME,PARENTFIRSTNAME,PARENTLASTNAME,ADDRESS,POSTALCODE,AREA) VALUES (?,?,?,?,?,?,?)");//,,AREA,PHONENUMBER1,PHONENUMBER2,PHONENUMBER3,EMAIL1,EMAIL2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, jTextStudentFirstName.getText());
             ps.setString(2, jTextStudentLastName.getText());
             ps.setString(3, jTextParentFirstName.getText());
             ps.setString(4, jTextParentLastName.getText());
             ps.setString(5, jTextAddress.getText());
-            ps.setString(6, jTextPostalCode.getText());
+            ps.setInt(6, Integer.parseInt(jTextPostalCode.getText()));
             ps.setString(7, jTextArea.getText());
-            ps.setString(8, jTextPhoneNumber1.getText());
-            ps.setString(9, jTextPhoneNumber2.getText());
-            ps.setString(10, jTextPhoneNumber3.getText());
-            ps.setString(11, jTextEmail1.getText());
-            ps.setString(12, jTextEmail2.getText());
+//            ps.setInt(8, Integer.parseInt(jTextPhoneNumber1.getText()));
+//            ps.setInt(9, Integer.parseInt(jTextPhoneNumber2.getText()));
+//            ps.setInt(10, Integer.parseInt(jTextPhoneNumber3.getText()));
+//            ps.setString(11, jTextEmail1.getText());
+//            ps.setString(12, jTextEmail2.getText());
             
             int dialogButton = 0;
             int dialogResult = JOptionPane.showConfirmDialog (null, "Do you want to store the entry?","Warning",dialogButton);
@@ -472,29 +339,7 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
         }catch(SQLException e){
             System.out.println(e);
         }
-        
-    }//GEN-LAST:event_jButtonSaveRecordActionPerformed
-
-    private void jButtonEditRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditRecordActionPerformed
-        // TODO add your handling code here:
-        jTextCustomerID.setEditable(true);
-        jTextStudentFirstName.setEditable(true);
-        jTextStudentLastName.setEditable(true);
-        jTextParentFirstName.setEditable(true);
-        jTextParentLastName.setEditable(true);
-        jTextAddress.setEditable(true);
-        jTextPostalCode.setEditable(true);
-        jTextArea.setEditable(true);
-        jTextPhoneNumber1.setEditable(true);
-        jTextPhoneNumber2.setEditable(true);
-        jTextPhoneNumber3.setEditable(true);
-        jTextEmail1.setEditable(true);
-        jTextEmail2.setEditable(true);
-        
-//        jTextEmail1.setText("test");
-//        jTextEmail2.setText("test2");
-//        jTextCustomerID.setEditable(true);
-    }//GEN-LAST:event_jButtonEditRecordActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -513,43 +358,36 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StageTwoDataUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StageThreeDataEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StageTwoDataUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StageThreeDataEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StageTwoDataUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StageThreeDataEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StageTwoDataUpdate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StageThreeDataEntry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StageTwoDataUpdate().setVisible(true);
+                new StageThreeDataEntry().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.github.lgooddatepicker.components.DatePicker datePickerSDate;
-    private javax.swing.JButton jButtonEditRecord;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonLogout;
-    private javax.swing.JButton jButtonSaveRecord;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -559,21 +397,17 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextAddress;
     private javax.swing.JTextField jTextArea;
     private javax.swing.JTextField jTextCustomerID;
     private javax.swing.JTextField jTextEmail1;
     private javax.swing.JTextField jTextEmail2;
-    private javax.swing.JTextArea jTextGeneralNote;
     private javax.swing.JTextField jTextParentFirstName;
     private javax.swing.JTextField jTextParentLastName;
     private javax.swing.JTextField jTextPhoneNumber1;
     private javax.swing.JTextField jTextPhoneNumber2;
     private javax.swing.JTextField jTextPhoneNumber3;
     private javax.swing.JTextField jTextPostalCode;
-    private javax.swing.JTextField jTextSnote;
     private javax.swing.JTextField jTextStudentFirstName;
     private javax.swing.JTextField jTextStudentLastName;
     // End of variables declaration//GEN-END:variables

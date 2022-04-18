@@ -5,6 +5,7 @@
     <class>schoolerpinvoicemydata.Employee</class>
     <class>schoolerpinvoicemydata.Employees</class>
     <class>schoolerpinvoicemydata.TestQuery.Test</class>
+    <class>schoolerpinvoicemydata.Students</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/invoiceMyDataAPI"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>

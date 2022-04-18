@@ -4,9 +4,9 @@
  */
 package schoolerpinvoicemydata.controllers;
 
-import entityClasses.Employees;
-import entityClasses.exceptions.NonexistentEntityException;
-import entityClasses.exceptions.PreexistingEntityException;
+import schoolerpinvoicemydata.entityClasses.Employees;
+import schoolerpinvoicemydata.entityClasses.exceptions.NonexistentEntityException;
+import schoolerpinvoicemydata.entityClasses.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;

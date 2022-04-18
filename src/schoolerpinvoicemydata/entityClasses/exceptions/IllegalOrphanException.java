@@ -1,4 +1,4 @@
-package entityClasses.exceptions;
+package schoolerpinvoicemydata.entityClasses.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

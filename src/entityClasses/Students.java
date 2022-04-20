@@ -5,6 +5,11 @@
 package entityClasses;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -207,4 +212,19 @@ public class Students implements Serializable {
         return "schoolerpinvoicemydata.Students[ customerid=" + customerid + " ]";
     }
     
+    public ResultSet getTest(){
+        String SELECT_QUERY = "SELECT * FROM SA.STUDENTS ORDER BY STUDENTLASTNAME ASC";
+        ResultSet result = null;
+        try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+            Statement stmt = con.createStatement();
+            result = stmt.executeQuery(SELECT_QUERY);
+            System.out.println(result);
+            return result;
+            
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return result;
+    }
 }

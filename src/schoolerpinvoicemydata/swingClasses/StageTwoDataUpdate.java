@@ -20,14 +20,23 @@ import javax.swing.JOptionPane;
  */
 public class StageTwoDataUpdate extends javax.swing.JFrame {
     private String resulta;
+    
+    public void setStageTwoDataUpdate(String resulta){
+        this.resulta = resulta;
+    }
 
     /**
      * Creates new form StageTwoUserNameInfo
      */
+    public StageTwoDataUpdate(String resulta){
+        this.resulta = resulta;
+    }
     public StageTwoDataUpdate() {
+       
         initComponents();
+        this.resulta = resulta;
         System.out.println("aaaa");
-        System.out.println(resulta);
+        System.out.println("::::"+resulta);
 //        String[] splitResult = result.split(" ");
   //      for (String kati:splitResult){
     //        System.out.println(kati);
@@ -40,7 +49,7 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
             Statement stmt = con.createStatement();
             ResultSet result = stmt.executeQuery(SELECT_QUERY);
-            System.out.println(result);
+            //System.out.println(result);
             while(result.next()){
                 //jComboBox1.addItem(result.getString("STUDENTLASTNAME")+" "+result.getString("STUDENTFIRSTNAME"));//+" CustomerID: "+result.getString("CUSTOMERID")); 
                 jTextCustomerID.setText(result.getString("CUSTOMERID"));
@@ -54,13 +63,9 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
         }
     }
 
-    public String getResult() {
-        return resulta;
-    }
 
-    public void setResult(String resulta) {
-        this.resulta = resulta;
-    }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.

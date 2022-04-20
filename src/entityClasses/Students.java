@@ -212,7 +212,7 @@ public class Students implements Serializable {
         return "schoolerpinvoicemydata.Students[ customerid=" + customerid + " ]";
     }
     
-    public ResultSet getTest(){
+    public ResultSet getStudentsFromSQL(){
         String SELECT_QUERY = "SELECT * FROM SA.STUDENTS ORDER BY STUDENTLASTNAME ASC";
         ResultSet result = null;
         try{
@@ -227,4 +227,6 @@ public class Students implements Serializable {
         }
         return result;
     }
+    
+    
 }

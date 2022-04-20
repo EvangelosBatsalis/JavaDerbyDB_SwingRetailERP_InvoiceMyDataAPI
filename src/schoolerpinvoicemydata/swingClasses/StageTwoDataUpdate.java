@@ -19,48 +19,58 @@ import javax.swing.JOptionPane;
  * @author User
  */
 public class StageTwoDataUpdate extends javax.swing.JFrame {
-    private String resulta;
+    private String resultSetter;
     
-    public void setStageTwoDataUpdate(String resulta){
-        this.resulta = resulta;
+    public void setResultSetter(String resultSetter){
+        this.resultSetter = "aaaaa";
     }
+    
+    //public void setStageTwoDataUpdate(String resulta){
+    //    this.resulta = resulta;
+    //}
 
     /**
      * Creates new form StageTwoUserNameInfo
      */
-    public StageTwoDataUpdate(String resulta){
-        this.resulta = resulta;
-    }
-    public StageTwoDataUpdate() {
-       
+    //public StageTwoDataUpdate(String resulta){
+    //    this.resulta = resulta;
+    //}
+    public StageTwoDataUpdate(String resultSetter) {
+        this.resultSetter = resultSetter;
+        System.out.println("Now Inside Stage two: "+resultSetter);
         initComponents();
-        this.resulta = resulta;
-        System.out.println("aaaa");
-        System.out.println("::::"+resulta);
+        
+        
+        
+        
+        
+    //    this.resulta = resulta;
+    //    System.out.println("aaaa");
+    //    System.out.println("::::"+resulta);
 //        String[] splitResult = result.split(" ");
   //      for (String kati:splitResult){
     //        System.out.println(kati);
       //  }
         
         //SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = 'as2' AND STUDENTLASTNAME = 'ss3';
-         String SELECT_QUERY = "";//"SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = '"+ splitResult.get(0)+ "' AND STUDENTLASTNAME = '"+splitResult.get(1)+"'";
-        
-        try{
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-            Statement stmt = con.createStatement();
-            ResultSet result = stmt.executeQuery(SELECT_QUERY);
-            //System.out.println(result);
-            while(result.next()){
-                //jComboBox1.addItem(result.getString("STUDENTLASTNAME")+" "+result.getString("STUDENTFIRSTNAME"));//+" CustomerID: "+result.getString("CUSTOMERID")); 
-                jTextCustomerID.setText(result.getString("CUSTOMERID"));
-                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
-                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
-            
-            }
-        
-        }catch(SQLException e){
-            System.out.println(e);
-        }
+//         String SELECT_QUERY = "";//"SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = '"+ splitResult.get(0)+ "' AND STUDENTLASTNAME = '"+splitResult.get(1)+"'";
+//        
+//        try{
+//            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+//            Statement stmt = con.createStatement();
+//            ResultSet result = stmt.executeQuery(SELECT_QUERY);
+//            //System.out.println(result);
+//            while(result.next()){
+//                //jComboBox1.addItem(result.getString("STUDENTLASTNAME")+" "+result.getString("STUDENTFIRSTNAME"));//+" CustomerID: "+result.getString("CUSTOMERID")); 
+//                jTextCustomerID.setText(result.getString("CUSTOMERID"));
+//                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
+//                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
+//            
+//            }
+//        
+//        }catch(SQLException e){
+//            System.out.println(e);
+//        }
     }
 
 
@@ -534,7 +544,7 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StageTwoDataUpdate().setVisible(true);
+                new StageTwoDataUpdate("").setVisible(true);
             }
         });
     }

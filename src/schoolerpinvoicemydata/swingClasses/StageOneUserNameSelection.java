@@ -37,25 +37,10 @@ public class StageOneUserNameSelection extends javax.swing.JFrame {
         //added library for jcombo auto complete
         AutoCompleteDecorator.decorate(jComboBox1);
         Students student = new Students();
-        ResultSet result = student.getTest();
+        ResultSet result = student.getStudentsFromSQL();
         while(result.next()){
             jComboBox1.addItem(result.getString("STUDENTLASTNAME")+" "+result.getString("STUDENTFIRSTNAME"));//+" CustomerID: "+result.getString("CUSTOMERID")); 
         }
-//        String SELECT_QUERY = "SELECT * FROM SA.STUDENTS ORDER BY STUDENTLASTNAME ASC";
-//        
-//        try{
-//            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-//            Statement stmt = con.createStatement();
-//            ResultSet result = stmt.executeQuery(SELECT_QUERY);
-//            System.out.println(result);
-//            while(result.next()){
-//                jComboBox1.addItem(result.getString("STUDENTLASTNAME")+" "+result.getString("STUDENTFIRSTNAME"));//+" CustomerID: "+result.getString("CUSTOMERID")); 
-//            }
-//            
-//            
-//        }catch(SQLException e){
-//            System.out.println(e);
-//        }
     }
 
     /**
@@ -189,15 +174,17 @@ public class StageOneUserNameSelection extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String resulta = jComboBox1.getSelectedItem().toString();
-        StageTwoDataUpdate usernameInfo = new StageTwoDataUpdate();
-        usernameInfo.setStageTwoDataUpdate(resulta);
+        String resultSetter = jComboBox1.getSelectedItem().toString();
+        StageTwoDataUpdate usernameInfo = new StageTwoDataUpdate(resultSetter);
+        usernameInfo.setResultSetter(resultSetter);
+        System.out.println("InsideStageOne: "+resultSetter);
+        //usernameInfo.setStageTwoDataUpdate(resulta);
         usernameInfo.pack();
         usernameInfo.setLocationRelativeTo(null);
         usernameInfo.setVisible(true);
         //System.out.println(jComboBox1.getSelectedItem());
         //usernameInfo.setStageTwoDataUpdate(resulta);
-        System.out.println(resulta);
+        //System.out.println(resulta);
         
         
     }//GEN-LAST:event_jButton3ActionPerformed

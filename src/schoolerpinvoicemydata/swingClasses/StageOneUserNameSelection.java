@@ -176,7 +176,6 @@ public class StageOneUserNameSelection extends javax.swing.JFrame {
         // TODO add your handling code here:
         String resultSetter = jComboBox1.getSelectedItem().toString();
         StageTwoDataUpdate usernameInfo = new StageTwoDataUpdate(resultSetter);
-        usernameInfo.setResultSetter(resultSetter);
         System.out.println("InsideStageOne: "+resultSetter);
         //usernameInfo.setStageTwoDataUpdate(resulta);
         usernameInfo.pack();

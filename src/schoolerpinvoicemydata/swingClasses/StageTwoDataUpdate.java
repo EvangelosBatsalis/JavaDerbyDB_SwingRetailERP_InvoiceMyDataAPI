@@ -5,6 +5,7 @@
  */
 package schoolerpinvoicemydata.swingClasses;
 
+import entityClasses.Students;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,56 +22,42 @@ import javax.swing.JOptionPane;
 public class StageTwoDataUpdate extends javax.swing.JFrame {
     private String resultSetter;
     
-    public void setResultSetter(String resultSetter){
-        this.resultSetter = "aaaaa";
-    }
+    //just a flag for edit prompt message
+    private Boolean editableFlag = false;
     
-    //public void setStageTwoDataUpdate(String resulta){
-    //    this.resulta = resulta;
-    //}
-
-    /**
-     * Creates new form StageTwoUserNameInfo
-     */
-    //public StageTwoDataUpdate(String resulta){
-    //    this.resulta = resulta;
-    //}
-    public StageTwoDataUpdate(String resultSetter) {
+    public StageTwoDataUpdate(String resultSetter){
         this.resultSetter = resultSetter;
         System.out.println("Now Inside Stage two: "+resultSetter);
         initComponents();
         
-        
-        
-        
-        
-    //    this.resulta = resulta;
-    //    System.out.println("aaaa");
-    //    System.out.println("::::"+resulta);
-//        String[] splitResult = result.split(" ");
-  //      for (String kati:splitResult){
-    //        System.out.println(kati);
-      //  }
-        
-        //SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = 'as2' AND STUDENTLASTNAME = 'ss3';
-//         String SELECT_QUERY = "";//"SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = '"+ splitResult.get(0)+ "' AND STUDENTLASTNAME = '"+splitResult.get(1)+"'";
-//        
-//        try{
-//            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-//            Statement stmt = con.createStatement();
-//            ResultSet result = stmt.executeQuery(SELECT_QUERY);
-//            //System.out.println(result);
-//            while(result.next()){
-//                //jComboBox1.addItem(result.getString("STUDENTLASTNAME")+" "+result.getString("STUDENTFIRSTNAME"));//+" CustomerID: "+result.getString("CUSTOMERID")); 
-//                jTextCustomerID.setText(result.getString("CUSTOMERID"));
-//                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
-//                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
-//            
-//            }
-//        
-//        }catch(SQLException e){
-//            System.out.println(e);
-//        }
+        //New Object Entity recalling it for making SQL query 
+        Students student = new Students();
+        String[] splitedResultSetter = resultSetter.split(" "); //Splits first name and last name for use to tge query
+        String studentFirstNameSplited = splitedResultSetter[1];//attention the names are in opposite Direction in array
+        String studentLastNameSplited = splitedResultSetter[0];
+        System.out.println(studentFirstNameSplited +"\t"+ studentLastNameSplited); //output test
+        try{
+            ResultSet result = student.getStudentsSpecificDataFromSQL(studentFirstNameSplited, studentLastNameSplited); //call the getStudentsSpecificDataFromSQL from Student entity
+            //prints the ResultSet using while and print the output to Swing JtextBoxes
+            System.out.println("result: "+result);
+            while(result.next()){
+                jTextCustomerID.setText(result.getString("CUSTOMERID"));
+                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
+                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
+                jTextParentFirstName.setText(result.getString("PARENTFIRSTNAME"));
+                jTextParentLastName.setText(result.getString("PARENTLASTNAME"));
+                jTextAddress.setText(result.getString("ADDRESS"));
+                jTextPostalCode.setText(result.getString("POSTALCODE"));
+                jTextArea.setText(result.getString("AREA"));
+                jTextPhoneNumber1.setText(result.getString("PHONENUMBER1"));
+                jTextPhoneNumber2.setText(result.getString("PHONENUMBER2"));
+                jTextPhoneNumber3.setText(result.getString("PHONENUMBER3"));
+                jTextEmail1.setText(result.getString("EMAIL1"));
+                jTextEmail2.setText(result.getString("EMAIL2"));
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
     }
 
 
@@ -450,48 +437,54 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
 
     private void jButtonSaveRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveRecordActionPerformed
         // TODO add your handling code here:
-        try{
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-            PreparedStatement ps = con.prepareStatement("INSERT INTO SA.EMPLOYEES VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-            ps.setString(1, jTextStudentFirstName.getText());
-            ps.setString(2, jTextStudentLastName.getText());
-            ps.setString(3, jTextParentFirstName.getText());
-            ps.setString(4, jTextParentLastName.getText());
-            ps.setString(5, jTextAddress.getText());
-            ps.setString(6, jTextPostalCode.getText());
-            ps.setString(7, jTextArea.getText());
-            ps.setString(8, jTextPhoneNumber1.getText());
-            ps.setString(9, jTextPhoneNumber2.getText());
-            ps.setString(10, jTextPhoneNumber3.getText());
-            ps.setString(11, jTextEmail1.getText());
-            ps.setString(12, jTextEmail2.getText());
-            
-            int dialogButton = 0;
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Do you want to store the entry?","Warning",dialogButton);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Entry updated succesfull!!", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-                jTextStudentFirstName.setEditable(false);
-                jTextStudentLastName.setEditable(false);
-                jTextParentFirstName.setEditable(false);
-                jTextParentLastName.setEditable(false);
-                jTextAddress.setEditable(false);
-                jTextPostalCode.setEditable(false);
-                jTextArea.setEditable(false);
-                jTextPhoneNumber1.setEditable(false);
-                jTextPhoneNumber2.setEditable(false);
-                jTextPhoneNumber3.setEditable(false);
-                jTextEmail1.setEditable(false);
-                jTextEmail2.setEditable(false);
+        //just a flag for edit message
+        if(editableFlag == false){
+            JOptionPane.showMessageDialog(null, "Save record is disabled please edit record first", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+        }else{
+            try{
+                Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+                PreparedStatement ps = con.prepareStatement("INSERT INTO SA.STUDENTS VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                ps.setString(1, jTextStudentFirstName.getText());
+                ps.setString(2, jTextStudentLastName.getText());
+                ps.setString(3, jTextParentFirstName.getText());
+                ps.setString(4, jTextParentLastName.getText());
+                ps.setString(5, jTextAddress.getText());
+                ps.setInt(6, Integer.parseInt(jTextPostalCode.getText()));
+                ps.setString(7, jTextArea.getText());
+                ps.setInt(8, Integer.parseInt(jTextPhoneNumber1.getText()));
+                ps.setInt(9, Integer.parseInt(jTextPhoneNumber2.getText()));
+                ps.setInt(10, Integer.parseInt(jTextPhoneNumber3.getText()));
+                ps.setString(11, jTextEmail1.getText());
+                ps.setString(12, jTextEmail2.getText());
+
+                int dialogButton = 0;
+                int dialogResult = JOptionPane.showConfirmDialog (null, "Do you want to store the entry?","Warning",dialogButton);
+                if(dialogResult == JOptionPane.YES_OPTION){
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Entry updated succesfull!!", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                    jTextStudentFirstName.setEditable(false);
+                    jTextStudentLastName.setEditable(false);
+                    jTextParentFirstName.setEditable(false);
+                    jTextParentLastName.setEditable(false);
+                    jTextAddress.setEditable(false);
+                    jTextPostalCode.setEditable(false);
+                    jTextArea.setEditable(false);
+                    jTextPhoneNumber1.setEditable(false);
+                    jTextPhoneNumber2.setEditable(false);
+                    jTextPhoneNumber3.setEditable(false);
+                    jTextEmail1.setEditable(false);
+                    jTextEmail2.setEditable(false);
+                }
+            }catch(SQLException e){
+                System.out.println(e);
             }
-        }catch(SQLException e){
-            System.out.println(e);
         }
-        
     }//GEN-LAST:event_jButtonSaveRecordActionPerformed
 
     private void jButtonEditRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditRecordActionPerformed
         // TODO add your handling code here:
+        
+        editableFlag = true;
         jTextCustomerID.setEditable(true);
         jTextStudentFirstName.setEditable(true);
         jTextStudentLastName.setEditable(true);
@@ -505,10 +498,6 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
         jTextPhoneNumber3.setEditable(true);
         jTextEmail1.setEditable(true);
         jTextEmail2.setEditable(true);
-        
-//        jTextEmail1.setText("test");
-//        jTextEmail2.setText("test2");
-//        jTextCustomerID.setEditable(true);
     }//GEN-LAST:event_jButtonEditRecordActionPerformed
 
     /**

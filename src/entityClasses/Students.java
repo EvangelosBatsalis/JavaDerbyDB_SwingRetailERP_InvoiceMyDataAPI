@@ -228,5 +228,25 @@ public class Students implements Serializable {
         return result;
     }
     
+    //it takes all entity through given first name and last name from sql
+    public ResultSet getStudentsSpecificDataFromSQL(String studentFirstName, String studentLastName){
+//        String SELECT_QUERY = "SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = '"+studentFirstName+"' AND STUDENTLASTNAME = '"+studentLastName+"'";
+        String SELECT_QUERY = "SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = '"+studentFirstName+"' AND STUDENTLASTNAME = '"+studentLastName+"'";
+        ResultSet result = null;
+        try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+            Statement stmt = con.createStatement();
+            result = stmt.executeQuery(SELECT_QUERY);
+            System.out.println("typwnei"+result.getString("STUDENTFIRSTNAME"));
+            while(result.next()){
+                System.out.println("typwnei"+result.getString("STUDENTFIRSTNAME"));
+            }
+            return result;
+            
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return result;
+    }
     
 }

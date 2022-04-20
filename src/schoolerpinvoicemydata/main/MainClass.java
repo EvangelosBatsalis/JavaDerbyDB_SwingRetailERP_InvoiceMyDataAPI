@@ -9,8 +9,9 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import schoolerpinvoicemydata.swingClasses.MainWindowFrame;
-
-
+import com.arakelian.faker.model.Person;
+import com.arakelian.faker.service.RandomPerson;
+import java.util.List;
 
 
 /**
@@ -29,6 +30,9 @@ public class MainClass {
         mainWindowsFrame.pack();
         mainWindowsFrame.setLocationRelativeTo(null);
         mainWindowsFrame.setVisible(true);   
+        
+        //testing faker
+//        List<Person> people = RandomPerson.get().listOf(20);
     }
 }
     

@@ -69,3 +69,9 @@ CREATE TABLE SA.TEST (ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         LastName VARCHAR(20),
         Point REAL DEFAULT 0.0,
         BirthDate DATE DEFAULT '1999-12-31');
+
+
+com.github.javafaker	 
+com.github.javafaker.idnumbers	 
+com.github.javafaker.service	 
+com.github.javafaker.service.files	

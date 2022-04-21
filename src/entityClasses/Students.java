@@ -249,4 +249,17 @@ public class Students implements Serializable {
         return result;
     }
     
+    public void setUpdateStudentEntityDAO(String jTextStudentFirstName, String jTextStudentLastName, String jTextParentFirstName,
+                                          String jTextParentLastName  , String jTextAddress        , String jTextPostalCode,
+                                          String jTextArea            , String jTextPhoneNumber1   , String jTextPhoneNumber2,
+                                          String jTextPhoneNumber3    , String jTextEmail1         , String jTextEmail2){
+    
+        //UPDATE STUDENTS SET ADDRESS = 'KATI' WHERE CUSTOMERID=1;
+        
+    }
+    
+    public void setDeleteStudentEntityDao(){
+        
+    }
+    
 }

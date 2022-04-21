@@ -22,13 +22,45 @@ import javax.swing.JOptionPane;
 public class StageTwoDataUpdate extends javax.swing.JFrame {
     private String resultSetter;
     
-    //just a flag for edit prompt message
+    //initiate some variables to use them with if..else and chech if checkboxes has been changed
+    private String TextCustomerID;
+    private String TextStudentFirstName;
+    private String TextStudentLastName;
+    private String TextParentFirstName;
+    private String TextParentLastName;
+    private String TextAddress;
+    private String TextPostalCode;
+    private String TextArea;
+    private String TextPhoneNumber1;
+    private String TextPhoneNumber2;
+    private String TextPhoneNumber3;
+    private String TextEmail1;
+    private String TextEmail2;
+
+    //just a flag for edit prompt message @checkButtons
     private Boolean editableFlag = false;
     
     public StageTwoDataUpdate(String resultSetter){
         this.resultSetter = resultSetter;
         System.out.println("Now Inside Stage two: "+resultSetter);
+        
         initComponents();
+        
+        //making initialization reads values from textboxes and stores them to global variables
+            this.TextCustomerID = jTextCustomerID.getText();
+            this.TextStudentFirstName = jTextStudentFirstName.getText();
+            this.TextStudentLastName = jTextStudentLastName.getText();
+            this.TextParentFirstName = jTextParentFirstName.getText();
+            this.TextParentLastName = jTextParentLastName.getText();
+            this.TextAddress = jTextAddress.getText();
+            this.TextPostalCode = jTextPostalCode.getText();
+            this.TextArea = jTextArea.getText();
+            this.TextPhoneNumber1 = jTextPhoneNumber1.getText();
+            this.TextPhoneNumber2 = jTextPhoneNumber2.getText();
+            this.TextPhoneNumber3 = jTextPhoneNumber3.getText();
+            this.TextEmail1 = jTextEmail1.getText();
+            this.TextEmail2 = jTextEmail2.getText();
+        
         
         //New Object Entity recalling it for making SQL query 
         Students student = new Students();
@@ -441,26 +473,29 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
         if(editableFlag == false){
             JOptionPane.showMessageDialog(null, "Save record is disabled please edit record first", this.getTitle(), JOptionPane.WARNING_MESSAGE);
         }else{
-            try{
-                Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-                PreparedStatement ps = con.prepareStatement("INSERT INTO SA.STUDENTS VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-                ps.setString(1, jTextStudentFirstName.getText());
-                ps.setString(2, jTextStudentLastName.getText());
-                ps.setString(3, jTextParentFirstName.getText());
-                ps.setString(4, jTextParentLastName.getText());
-                ps.setString(5, jTextAddress.getText());
-                ps.setInt(6, Integer.parseInt(jTextPostalCode.getText()));
-                ps.setString(7, jTextArea.getText());
-                ps.setInt(8, Integer.parseInt(jTextPhoneNumber1.getText()));
-                ps.setInt(9, Integer.parseInt(jTextPhoneNumber2.getText()));
-                ps.setInt(10, Integer.parseInt(jTextPhoneNumber3.getText()));
-                ps.setString(11, jTextEmail1.getText());
-                ps.setString(12, jTextEmail2.getText());
+                //creates object for use SQL methods to update the database
+                Students students = new Students();
+                //students.setUpdateStudentEntityDAO();
+
+                //Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+                //PreparedStatement ps = con.prepareStatement("INSERT INTO SA.STUDENTS VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                //ps.setString(1, jTextStudentFirstName.getText());
+                //ps.setString(2, jTextStudentLastName.getText());
+                //ps.setString(3, jTextParentFirstName.getText());
+                //ps.setString(4, jTextParentLastName.getText());
+                //ps.setString(5, jTextAddress.getText());
+                //ps.setInt(6, Integer.parseInt(jTextPostalCode.getText()));
+                //ps.setString(7, jTextArea.getText());
+                //ps.setInt(8, Integer.parseInt(jTextPhoneNumber1.getText()));
+                //ps.setInt(9, Integer.parseInt(jTextPhoneNumber2.getText()));
+                //ps.setInt(10, Integer.parseInt(jTextPhoneNumber3.getText()));
+                //ps.setString(11, jTextEmail1.getText());
+                //ps.setString(12, jTextEmail2.getText());
 
                 int dialogButton = 0;
                 int dialogResult = JOptionPane.showConfirmDialog (null, "Do you want to store the entry?","Warning",dialogButton);
                 if(dialogResult == JOptionPane.YES_OPTION){
-                    ps.executeUpdate();
+                    //ps.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Entry updated succesfull!!", this.getTitle(), JOptionPane.WARNING_MESSAGE);
                     jTextStudentFirstName.setEditable(false);
                     jTextStudentLastName.setEditable(false);
@@ -475,9 +510,6 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
                     jTextEmail1.setEditable(false);
                     jTextEmail2.setEditable(false);
                 }
-            }catch(SQLException e){
-                System.out.println(e);
-            }
         }
     }//GEN-LAST:event_jButtonSaveRecordActionPerformed
 

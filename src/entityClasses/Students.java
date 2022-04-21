@@ -7,9 +7,12 @@ package entityClasses;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -248,15 +251,35 @@ public class Students implements Serializable {
         }
         return result;
     }
-    
-    public void setUpdateStudentEntityDAO(String jTextStudentFirstName, String jTextStudentLastName, String jTextParentFirstName,
-                                          String jTextParentLastName  , String jTextAddress        , String jTextPostalCode,
-                                          String jTextArea            , String jTextPhoneNumber1   , String jTextPhoneNumber2,
-                                          String jTextPhoneNumber3    , String jTextEmail1         , String jTextEmail2){
+    public void setUpdateStudentEntityDAO(){
+//    public void setUpdateStudentEntityDAO(String jTextStudentFirstName, String jTextStudentLastName, String jTextParentFirstName,
+//                                          String jTextParentLastName  , String jTextAddress        , String jTextPostalCode,
+//                                          String jTextArea            , String jTextPhoneNumber1   , String jTextPhoneNumber2,
+//                                          String jTextPhoneNumber3    , String jTextEmail1         , String jTextEmail2){
     
         //UPDATE STUDENTS SET ADDRESS = 'KATI' WHERE CUSTOMERID=1;
+//        try{
+//            String SELECT_QUERY = "UPDATE STUDENTS SET ADDRESS = 'KATI2' WHERE CUSTOMERID=1";
+//            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+//            Statement stmt = con.createStatement();
+//            ResultSet result = stmt.executeQuery(SELECT_QUERY);
+//        }catch(SQLException e){
+//            System.out.println(e);
+//        }
         
+        String Update_Query = "UPDATE SA.STUDENTS SET EMAIL1 = ? WHERE CUSTOMERID = ?";
+        try{
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
+            PreparedStatement pstm = con.prepareStatement(Update_Query);
+                pstm.setInt(2, 1);
+                pstm.setString(1, "aaa");
+                //pstm.setString(2, "sss");
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+                          
     }
+    
     
     public void setDeleteStudentEntityDao(){
         

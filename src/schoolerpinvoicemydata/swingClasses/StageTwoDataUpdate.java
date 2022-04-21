@@ -13,7 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import schoolerpinvoicemydata.controllers.StudentsJpaController;
 
 /**
  *
@@ -475,8 +479,67 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
         }else{
                 //creates object for use SQL methods to update the database
                 Students students = new Students();
-                //students.setUpdateStudentEntityDAO();
-
+                
+                
+                if(!(jTextStudentFirstName.getText().equals(TextStudentFirstName))){
+                    TextStudentFirstName = jTextStudentFirstName.getText();
+                }if(!(jTextStudentLastName.getText().equals(TextStudentLastName))){
+                    TextStudentLastName = jTextStudentLastName.getText();
+                }if(!(jTextParentFirstName.getText().equals(TextParentFirstName))){
+                    TextParentFirstName = jTextParentFirstName.getText();
+                }if(!(jTextParentLastName.getText().equals(TextParentLastName))){
+                    TextParentLastName = jTextParentLastName.getText();
+                }if(!(jTextAddress.getText().equals(TextAddress))){
+                    TextAddress = jTextAddress.getText();
+                }if(!(jTextPostalCode.getText().equals(TextPostalCode))){
+                    TextPostalCode = jTextPostalCode.getText();
+                }if(!(jTextArea.getText().equals(TextArea))){
+                    TextArea = jTextArea.getText();
+                }if(!(jTextPhoneNumber1.getText().equals(TextPhoneNumber1))){
+                    TextPhoneNumber1 = jTextPhoneNumber1.getText();
+                }if(!(jTextPhoneNumber2.getText().equals(TextPhoneNumber2))){
+                    TextPhoneNumber2 = jTextPhoneNumber2.getText();
+                }if(!(jTextPhoneNumber3.getText().equals(TextPhoneNumber3))){
+                    TextPhoneNumber3 = jTextPhoneNumber3.getText();
+                }if(!(jTextEmail1.getText().equals(TextEmail1))){
+                    TextEmail1 = jTextEmail1.getText();
+                }if(!(jTextEmail2.getText().equals(TextEmail2))){
+                    TextEmail2 = jTextEmail2.getText();
+                }
+                
+//                jTextStudentFirstName.setText(TextStudentFirstName);
+//                jTextStudentLastName.setText(TextStudentLastName);
+//                jTextParentFirstName.setText(TextParentFirstName);
+//                jTextParentLastName.setText(TextParentLastName);
+//                jTextAddress.setText(TextAddress);
+//                jTextPostalCode.setText(TextPostalCode);
+//                jTextArea.setText(TextArea);
+//                jTextPhoneNumber1.setText(TextPhoneNumber1);
+//                jTextPhoneNumber2.setText(TextPhoneNumber2);
+//                jTextPhoneNumber3.setText(TextPhoneNumber3);
+//                jTextEmail1.setText(TextEmail1);
+//                jTextEmail2.setText(TextEmail2);
+                        
+                
+                
+                
+                    
+                    
+//                students.setUpdateStudentEntityDAO(TextStudentFirstName, TextStudentLastName, TextParentFirstName,
+//                                                   TextParentLastName,   TextAddress,         TextPostalCode,
+//                                                   TextArea,             TextPhoneNumber1,    TextPhoneNumber2,
+//                                                   TextPhoneNumber3,     TextEmail1,          TextEmail2);
+////                students.setCustomerid(1);
+//                students.setEmail1(TextEmail1);
+//                students.setEmail2(TextEmail2);
+//                
+//                EntityManager em;
+//                EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPIPU");
+//                em = emf.createEntityManager();
+//                em.getTransaction().begin();
+//                em.persist(students);
+//                em.getTransaction().commit();
+                
                 //Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
                 //PreparedStatement ps = con.prepareStatement("INSERT INTO SA.STUDENTS VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
                 //ps.setString(1, jTextStudentFirstName.getText());
@@ -517,7 +580,7 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         editableFlag = true;
-        jTextCustomerID.setEditable(true);
+        //jTextCustomerID.setEditable(true);
         jTextStudentFirstName.setEditable(true);
         jTextStudentLastName.setEditable(true);
         jTextParentFirstName.setEditable(true);

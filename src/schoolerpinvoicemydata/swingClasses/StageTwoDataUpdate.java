@@ -25,6 +25,7 @@ import schoolerpinvoicemydata.controllers.StudentsJpaController;
  */
 public class StageTwoDataUpdate extends javax.swing.JFrame {
     private String resultSetter;
+    private Students student = new Students();
     
     //initiate some variables to use them with if..else and chech if checkboxes has been changed
     private String TextCustomerID;
@@ -46,59 +47,47 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
     
     public StageTwoDataUpdate(String resultSetter){
         this.resultSetter = resultSetter;
-        System.out.println("Now Inside Stage two: "+resultSetter);
+        System.out.println("Now Inside Stage two: "+resultSetter);//safe delete
         
         initComponents();
+        //local variables initialization method
+        initLocalVariables();
         
-        //making initialization reads values from textboxes and stores them to global variables
-            this.TextCustomerID = jTextCustomerID.getText();
-            this.TextStudentFirstName = jTextStudentFirstName.getText();
-            this.TextStudentLastName = jTextStudentLastName.getText();
-            this.TextParentFirstName = jTextParentFirstName.getText();
-            this.TextParentLastName = jTextParentLastName.getText();
-            this.TextAddress = jTextAddress.getText();
-            this.TextPostalCode = jTextPostalCode.getText();
-            this.TextArea = jTextArea.getText();
-            this.TextPhoneNumber1 = jTextPhoneNumber1.getText();
-            this.TextPhoneNumber2 = jTextPhoneNumber2.getText();
-            this.TextPhoneNumber3 = jTextPhoneNumber3.getText();
-            this.TextEmail1 = jTextEmail1.getText();
-            this.TextEmail2 = jTextEmail2.getText();
+
         
         
-        //New Object Entity recalling it for making SQL query 
-        Students student = new Students();
-        String[] splitedResultSetter = resultSetter.split(" "); //Splits first name and last name for use to tge query
-        String studentFirstNameSplited = splitedResultSetter[1];//attention the names are in opposite Direction in array
-        String studentLastNameSplited = splitedResultSetter[0];
-        System.out.println(studentFirstNameSplited +"\t"+ studentLastNameSplited); //output test
-        try{
-            ResultSet result = student.getStudentsSpecificDataFromSQL(studentFirstNameSplited, studentLastNameSplited); //call the getStudentsSpecificDataFromSQL from Student entity
-            //prints the ResultSet using while and print the output to Swing JtextBoxes
-            System.out.println("result: "+result);
-            while(result.next()){
-                jTextCustomerID.setText(result.getString("CUSTOMERID"));
-                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
-                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
-                jTextParentFirstName.setText(result.getString("PARENTFIRSTNAME"));
-                jTextParentLastName.setText(result.getString("PARENTLASTNAME"));
-                jTextAddress.setText(result.getString("ADDRESS"));
-                jTextPostalCode.setText(result.getString("POSTALCODE"));
-                jTextArea.setText(result.getString("AREA"));
-                jTextPhoneNumber1.setText(result.getString("PHONENUMBER1"));
-                jTextPhoneNumber2.setText(result.getString("PHONENUMBER2"));
-                jTextPhoneNumber3.setText(result.getString("PHONENUMBER3"));
-                jTextEmail1.setText(result.getString("EMAIL1"));
-                jTextEmail2.setText(result.getString("EMAIL2"));
-            }
-        }catch(SQLException e){
-            System.out.println(e);
-        }
+        //initialize SQL query using Student entity
+        initializationSqlQuery();
+        
+        
+        //Students student = new Students();
+//        String[] splitedResultSetter = resultSetter.split(" "); //Splits first name and last name for use to tge query
+//        String studentFirstNameSplited = splitedResultSetter[1];//attention the names are in opposite Direction in array
+//        String studentLastNameSplited = splitedResultSetter[0];
+//        System.out.println(studentFirstNameSplited +"\t"+ studentLastNameSplited); //output test safe delete
+//        try{
+//            ResultSet result = student.getStudentsSpecificDataFromSQL(studentFirstNameSplited, studentLastNameSplited); //call the getStudentsSpecificDataFromSQL from Student entity
+//            //prints the ResultSet using while and print the output to Swing JtextBoxes
+//            System.out.println("result: "+result);
+//            while(result.next()){
+//                jTextCustomerID.setText(result.getString("CUSTOMERID"));
+//                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
+//                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
+//                jTextParentFirstName.setText(result.getString("PARENTFIRSTNAME"));
+//                jTextParentLastName.setText(result.getString("PARENTLASTNAME"));
+//                jTextAddress.setText(result.getString("ADDRESS"));
+//                jTextPostalCode.setText(result.getString("POSTALCODE"));
+//                jTextArea.setText(result.getString("AREA"));
+//                jTextPhoneNumber1.setText(result.getString("PHONENUMBER1"));
+//                jTextPhoneNumber2.setText(result.getString("PHONENUMBER2"));
+//                jTextPhoneNumber3.setText(result.getString("PHONENUMBER3"));
+//                jTextEmail1.setText(result.getString("EMAIL1"));
+//                jTextEmail2.setText(result.getString("EMAIL2"));
+//            }
+//        }catch(SQLException e){
+//            System.out.println(e);
+//        }
     }
-
-
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -480,7 +469,7 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
                 //creates object for use SQL methods to update the database
                 Students students = new Students();
                 
-                
+                TextCustomerID = jTextCustomerID.getText();
                 if(!(jTextStudentFirstName.getText().equals(TextStudentFirstName))){
                     TextStudentFirstName = jTextStudentFirstName.getText();
                 }if(!(jTextStudentLastName.getText().equals(TextStudentLastName))){
@@ -507,71 +496,33 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
                     TextEmail2 = jTextEmail2.getText();
                 }
                 
-//                jTextStudentFirstName.setText(TextStudentFirstName);
-//                jTextStudentLastName.setText(TextStudentLastName);
-//                jTextParentFirstName.setText(TextParentFirstName);
-//                jTextParentLastName.setText(TextParentLastName);
-//                jTextAddress.setText(TextAddress);
-//                jTextPostalCode.setText(TextPostalCode);
-//                jTextArea.setText(TextArea);
-//                jTextPhoneNumber1.setText(TextPhoneNumber1);
-//                jTextPhoneNumber2.setText(TextPhoneNumber2);
-//                jTextPhoneNumber3.setText(TextPhoneNumber3);
-//                jTextEmail1.setText(TextEmail1);
-//                jTextEmail2.setText(TextEmail2);
-                        
-                
-                
-                
-                    
-                    
-//                students.setUpdateStudentEntityDAO(TextStudentFirstName, TextStudentLastName, TextParentFirstName,
-//                                                   TextParentLastName,   TextAddress,         TextPostalCode,
-//                                                   TextArea,             TextPhoneNumber1,    TextPhoneNumber2,
-//                                                   TextPhoneNumber3,     TextEmail1,          TextEmail2);
-////                students.setCustomerid(1);
-//                students.setEmail1(TextEmail1);
-//                students.setEmail2(TextEmail2);
-//                
-//                EntityManager em;
-//                EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPIPU");
-//                em = emf.createEntityManager();
-//                em.getTransaction().begin();
-//                em.persist(students);
-//                em.getTransaction().commit();
-                
-                //Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-                //PreparedStatement ps = con.prepareStatement("INSERT INTO SA.STUDENTS VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-                //ps.setString(1, jTextStudentFirstName.getText());
-                //ps.setString(2, jTextStudentLastName.getText());
-                //ps.setString(3, jTextParentFirstName.getText());
-                //ps.setString(4, jTextParentLastName.getText());
-                //ps.setString(5, jTextAddress.getText());
-                //ps.setInt(6, Integer.parseInt(jTextPostalCode.getText()));
-                //ps.setString(7, jTextArea.getText());
-                //ps.setInt(8, Integer.parseInt(jTextPhoneNumber1.getText()));
-                //ps.setInt(9, Integer.parseInt(jTextPhoneNumber2.getText()));
-                //ps.setInt(10, Integer.parseInt(jTextPhoneNumber3.getText()));
-                //ps.setString(11, jTextEmail1.getText());
-                //ps.setString(12, jTextEmail2.getText());
-
                 int dialogButton = 0;
                 int dialogResult = JOptionPane.showConfirmDialog (null, "Do you want to store the entry?","Warning",dialogButton);
                 if(dialogResult == JOptionPane.YES_OPTION){
-                    //ps.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Entry updated succesfull!!", this.getTitle(), JOptionPane.WARNING_MESSAGE);
-                    jTextStudentFirstName.setEditable(false);
-                    jTextStudentLastName.setEditable(false);
-                    jTextParentFirstName.setEditable(false);
-                    jTextParentLastName.setEditable(false);
-                    jTextAddress.setEditable(false);
-                    jTextPostalCode.setEditable(false);
-                    jTextArea.setEditable(false);
-                    jTextPhoneNumber1.setEditable(false);
-                    jTextPhoneNumber2.setEditable(false);
-                    jTextPhoneNumber3.setEditable(false);
-                    jTextEmail1.setEditable(false);
-                    jTextEmail2.setEditable(false);
+                    SQLException returnFromSetUpdateStudentEntityDAO = students.setUpdateStudentEntityDAO(TextStudentFirstName, TextStudentLastName, TextParentFirstName,
+                                                                                                          TextParentLastName,   TextAddress,         TextPostalCode,
+                                                                                                          TextArea,             TextPhoneNumber1,    TextPhoneNumber2,
+                                                                                                          TextPhoneNumber3,     TextEmail1,          TextEmail2,
+                                                                                                          TextCustomerID);
+                    if(returnFromSetUpdateStudentEntityDAO == null){
+                        JOptionPane.showMessageDialog(null,"record has been updated succesfull!!", this.getTitle(), JOptionPane.WARNING_MESSAGE);
+                        initializationSqlQueryAfterUpdate();
+                        
+                        jTextStudentFirstName.setEditable(false);
+                        jTextStudentLastName.setEditable(false);
+                        jTextParentFirstName.setEditable(false);
+                        jTextParentLastName.setEditable(false);
+                        jTextAddress.setEditable(false);
+                        jTextPostalCode.setEditable(false);
+                        jTextArea.setEditable(false);
+                        jTextPhoneNumber1.setEditable(false);
+                        jTextPhoneNumber2.setEditable(false);
+                        jTextPhoneNumber3.setEditable(false);
+                        jTextEmail1.setEditable(false);
+                        jTextEmail2.setEditable(false);
+                        }else{
+                        System.out.println("kati");
+                    }
                 }
         }
     }//GEN-LAST:event_jButtonSaveRecordActionPerformed
@@ -632,7 +583,79 @@ public class StageTwoDataUpdate extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    //local initialization variables method
+    private void initLocalVariables(){
+    //making initialization reads values from textboxes and stores them to global variables
+            this.TextCustomerID = jTextCustomerID.getText();
+            this.TextStudentFirstName = jTextStudentFirstName.getText();
+            this.TextStudentLastName = jTextStudentLastName.getText();
+            this.TextParentFirstName = jTextParentFirstName.getText();
+            this.TextParentLastName = jTextParentLastName.getText();
+            this.TextAddress = jTextAddress.getText();
+            this.TextPostalCode = jTextPostalCode.getText();
+            this.TextArea = jTextArea.getText();
+            this.TextPhoneNumber1 = jTextPhoneNumber1.getText();
+            this.TextPhoneNumber2 = jTextPhoneNumber2.getText();
+            this.TextPhoneNumber3 = jTextPhoneNumber3.getText();
+            this.TextEmail1 = jTextEmail1.getText();
+            this.TextEmail2 = jTextEmail2.getText();
+    }
+    
+    //Method for initialization SQL query using resultSetter from StageOneUserNameSelection swing resultSet
+    private void initializationSqlQuery(){
+        String[] splitedResultSetter = resultSetter.split(" "); //Splits first name and last name for use to tge query
+        String studentFirstNameSplited = splitedResultSetter[1];//attention the names are in opposite Direction in array
+        String studentLastNameSplited = splitedResultSetter[0];
+        System.out.println(studentFirstNameSplited +"\t"+ studentLastNameSplited); //output test safe delete
+        try{
+            ResultSet result = student.getStudentsSpecificDataFromSQL(studentFirstNameSplited, studentLastNameSplited); //call the getStudentsSpecificDataFromSQL from Student entity
+            //prints the ResultSet using while and print the output to Swing JtextBoxes
+            System.out.println("result: "+result);
+            while(result.next()){
+                jTextCustomerID.setText(result.getString("CUSTOMERID"));
+                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
+                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
+                jTextParentFirstName.setText(result.getString("PARENTFIRSTNAME"));
+                jTextParentLastName.setText(result.getString("PARENTLASTNAME"));
+                jTextAddress.setText(result.getString("ADDRESS"));
+                jTextPostalCode.setText(result.getString("POSTALCODE"));
+                jTextArea.setText(result.getString("AREA"));
+                jTextPhoneNumber1.setText(result.getString("PHONENUMBER1"));
+                jTextPhoneNumber2.setText(result.getString("PHONENUMBER2"));
+                jTextPhoneNumber3.setText(result.getString("PHONENUMBER3"));
+                jTextEmail1.setText(result.getString("EMAIL1"));
+                jTextEmail2.setText(result.getString("EMAIL2"));
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+    }
+    private void initializationSqlQueryAfterUpdate(){
+        try{
+            ResultSet result = student.getStudentsCustomerIdDataFromSQL(Integer.parseInt(this.TextCustomerID)); //call the getStudentsSpecificDataFromSQL from Student entity
+            //prints the ResultSet using while and print the output to Swing JtextBoxes
+            System.out.println("result: "+result);
+            while(result.next()){
+                jTextCustomerID.setText(result.getString("CUSTOMERID"));
+                jTextStudentFirstName.setText(result.getString("STUDENTFIRSTNAME"));
+                jTextStudentLastName.setText(result.getString("STUDENTLASTNAME"));
+                jTextParentFirstName.setText(result.getString("PARENTFIRSTNAME"));
+                jTextParentLastName.setText(result.getString("PARENTLASTNAME"));
+                jTextAddress.setText(result.getString("ADDRESS"));
+                jTextPostalCode.setText(result.getString("POSTALCODE"));
+                jTextArea.setText(result.getString("AREA"));
+                jTextPhoneNumber1.setText(result.getString("PHONENUMBER1"));
+                jTextPhoneNumber2.setText(result.getString("PHONENUMBER2"));
+                jTextPhoneNumber3.setText(result.getString("PHONENUMBER3"));
+                jTextEmail1.setText(result.getString("EMAIL1"));
+                jTextEmail2.setText(result.getString("EMAIL2"));
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.github.lgooddatepicker.components.DatePicker datePickerSDate;
     private javax.swing.JButton jButtonEditRecord;

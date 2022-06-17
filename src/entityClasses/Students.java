@@ -7,9 +7,13 @@ package entityClasses;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.swing.JOptionPane;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -44,7 +49,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Students.findByEmail1", query = "SELECT s FROM Students s WHERE s.email1 = :email1"),
     @NamedQuery(name = "Students.findByEmail2", query = "SELECT s FROM Students s WHERE s.email2 = :email2")})
 public class Students implements Serializable {
-
+    //db url and credential as final for static storing
+    private final String connectionUrl = "jdbc:derby://localhost:1527/InvoiceMyDataAPI";
+    private final String dbUserName = "sa";
+    private final String dbPassWord = "sa";
+    private Connection conn;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -216,8 +226,8 @@ public class Students implements Serializable {
         String SELECT_QUERY = "SELECT * FROM SA.STUDENTS ORDER BY STUDENTLASTNAME ASC";
         ResultSet result = null;
         try{
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-            Statement stmt = con.createStatement();
+            conn = DriverManager.getConnection(connectionUrl,dbUserName ,dbPassWord);
+            Statement stmt = conn.createStatement();
             result = stmt.executeQuery(SELECT_QUERY);
             System.out.println(result);
             return result;
@@ -234,8 +244,8 @@ public class Students implements Serializable {
         String SELECT_QUERY = "SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = '"+studentFirstName+"' AND STUDENTLASTNAME = '"+studentLastName+"'";
         ResultSet result = null;
         try{
-            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/InvoiceMyDataAPI","sa","sa");
-            Statement stmt = con.createStatement();
+            conn = DriverManager.getConnection(connectionUrl,dbUserName ,dbPassWord);
+            Statement stmt = conn.createStatement();
             result = stmt.executeQuery(SELECT_QUERY);
             System.out.println("typwnei"+result.getString("STUDENTFIRSTNAME"));
             while(result.next()){
@@ -249,14 +259,85 @@ public class Students implements Serializable {
         return result;
     }
     
-    public void setUpdateStudentEntityDAO(String jTextStudentFirstName, String jTextStudentLastName, String jTextParentFirstName,
+    //getSQL query using CustomerID
+    public ResultSet getStudentsCustomerIdDataFromSQL(int customerID){
+//        String SELECT_QUERY = "SELECT * FROM SA.STUDENTS WHERE STUDENTFIRSTNAME = '"+studentFirstName+"' AND STUDENTLASTNAME = '"+studentLastName+"'";
+        String SELECT_QUERY = "SELECT * FROM SA.STUDENTS WHERE CUSTOMERID = "+customerID;
+        ResultSet result = null;
+        try{
+            conn = DriverManager.getConnection(connectionUrl,dbUserName ,dbPassWord);
+            Statement stmt = conn.createStatement();
+            result = stmt.executeQuery(SELECT_QUERY);
+            System.out.println("typwnei"+result.getString("CUSTOMERID"));
+            while(result.next()){
+                System.out.println("typwnei"+result.getString("CUSTOMERID"));
+            }
+            return result;
+            
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return result;
+    }
+    
+    
+//    public void setUpdateStudentEntityDAO(){
+    public SQLException setUpdateStudentEntityDAO(String jTextStudentFirstName, String jTextStudentLastName, String jTextParentFirstName,
                                           String jTextParentLastName  , String jTextAddress        , String jTextPostalCode,
                                           String jTextArea            , String jTextPhoneNumber1   , String jTextPhoneNumber2,
-                                          String jTextPhoneNumber3    , String jTextEmail1         , String jTextEmail2){
-    
-        //UPDATE STUDENTS SET ADDRESS = 'KATI' WHERE CUSTOMERID=1;
+                                          String jTextPhoneNumber3    , String jTextEmail1         , String jTextEmail2,
+                                          String jTextCustomerID){
+        //int tempPOSTALCODE = Integer.parseInt(jTextPostalCode);
+        //System.out.println(tempPOSTALCODE);
         
+        String Update_Query = "UPDATE SA.STUDENTS SET STUDENTFIRSTNAME=?,STUDENTLASTNAME=?,"
+                + "PARENTFIRSTNAME=?,PARENTLASTNAME=?,ADDRESS=?,POSTALCODE=?,"
+                + "AREA=?,PHONENUMBER1=?,PHONENUMBER2=?,PHONENUMBER3=?,"
+                + "EMAIL1=?,EMAIL2=? WHERE CUSTOMERID=?";
+        
+        try{
+            conn = DriverManager.getConnection(connectionUrl,dbUserName ,dbPassWord);
+            PreparedStatement pstm = conn.prepareStatement(Update_Query);
+                pstm.setInt   (13, Integer.parseInt(jTextCustomerID));
+                pstm.setString(1, jTextStudentFirstName);
+                pstm.setString(2, jTextStudentLastName);
+                pstm.setString(3, jTextParentFirstName);
+                pstm.setString(4, jTextParentLastName);
+                pstm.setString(5, jTextAddress);
+                if(jTextPostalCode.equals("")){
+                    pstm.setNull   (6, Types.INTEGER);
+                }else{
+                   pstm.setInt   (6, Integer.parseInt(jTextPostalCode));}
+                pstm.setString(7, jTextArea);
+                if(jTextPhoneNumber1.equals("")){
+                    pstm.setNull   (8, Types.INTEGER);
+                }else{
+                    pstm.setInt   (8, Integer.parseInt(jTextPhoneNumber1));}
+                if(jTextPhoneNumber2.equals("")){
+                    pstm.setNull   (9, Types.INTEGER);
+                }else{
+                    pstm.setInt   (9, Integer.parseInt(jTextPhoneNumber2));}
+                if(jTextPhoneNumber3.equals("")){
+                    pstm.setNull   (10, Types.INTEGER);
+                }else{
+                    pstm.setInt   (10, Integer.parseInt(jTextPhoneNumber3));}
+                pstm.setString(11, jTextEmail1); 
+                pstm.setString(12, jTextEmail2);
+                int i = pstm.executeUpdate();
+                System.out.println(i+" record has been updated succesfull!!");
+                
+        }catch(SQLException | NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "SQLError: "+e, "WARNING", JOptionPane.WARNING_MESSAGE);
+            System.out.println(e);
+            //return e;
+//            if(e.equals("java.lang.NumberFormatException: ")){
+  //              System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    //        }
+        }
+        return null;
+                          
     }
+    
     
     public void setDeleteStudentEntityDao(){
         

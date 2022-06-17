@@ -1,1 +1,24 @@
+<<<<<<< HEAD
 Thu Apr 28 12:29:40 EEST 2022 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+=======
+Fri Apr 22 23:27:49 EEST 2022 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+----------------------------------------------------------------
+Fri Apr 22 23:27:57 EEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0180-52f5-9b79-000056a0cabb 
+on database directory C:\Users\User\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPI with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2a139a55 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_111/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=17.0.2+8-LTS-86
+user.dir=C:\Program Files\Java\jdk1.8.0_111\db
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Users\User\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Sat Apr 23 02:18:01 EEST 2022: Shutting down Derby engine
+----------------------------------------------------------------
+Sat Apr 23 02:18:01 EEST 2022:
+Shutting down instance a816c00e-0180-52f5-9b79-000056a0cabb on database directory C:\Users\User\Documents\GitHub\JavaDerbyDB_SwingRetailERP_InvoiceMyDataAPI\database\InvoiceMyDataAPI with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2a139a55 
+----------------------------------------------------------------
+>>>>>>> 161aa02eda76e0e7eb0c878698d143892052e4ee
